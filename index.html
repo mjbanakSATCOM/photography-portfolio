@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <meta name="description" content="A photography portfolio with collections of city and architecture, landscapes, portraits, and black and white work.">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="index.html" aria-current="page">Portfolio</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    <section class="hero" aria-label="Featured photograph">
+      <picture>
+        <source type="image/webp" srcset="images/landscapes/img-3663.webp">
+        <img
+          src="images/landscapes/img-3663.jpg"
+          alt="Landscapes, photo 3"
+          width="2400"
+          height="1361"
+          fetchpriority="high"
+        >
+      </picture>
+    </section>
+
+    <h1 class="section-label" id="albums">Albums</h1>
+    <div class="album-grid">
+      <a class="album-card" href="albums/city-architecture.html">
+        <div class="album-card-media">
+          <picture>
+            <source type="image/webp" srcset="images/city-architecture/img-1101-thumb.webp">
+            <img
+              src="images/city-architecture/img-1101-thumb.jpg"
+              alt=""
+              width="800"
+              height="600"
+              loading="lazy"
+            >
+          </picture>
+        </div>
+        <div class="album-card-meta">
+          <span class="album-card-title">City &amp; Architecture</span>
+          <span class="album-card-count">3</span>
+        </div>
+      </a>
+
+      <a class="album-card" href="albums/landscapes.html">
+        <div class="album-card-media">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/img-0497-thumb.webp">
+            <img
+              src="images/landscapes/img-0497-thumb.jpg"
+              alt=""
+              width="800"
+              height="600"
+              loading="lazy"
+            >
+          </picture>
+        </div>
+        <div class="album-card-meta">
+          <span class="album-card-title">Landscapes</span>
+          <span class="album-card-count">4</span>
+        </div>
+      </a>
+
+      <a class="album-card" href="albums/portraits.html">
+        <div class="album-card-media">
+          <picture>
+            <source type="image/webp" srcset="images/portraits/img-0870-thumb.webp">
+            <img
+              src="images/portraits/img-0870-thumb.jpg"
+              alt=""
+              width="800"
+              height="635"
+              loading="lazy"
+            >
+          </picture>
+        </div>
+        <div class="album-card-meta">
+          <span class="album-card-title">Portraits</span>
+          <span class="album-card-count">1</span>
+        </div>
+      </a>
+
+      <a class="album-card" href="albums/black-white.html">
+        <div class="album-card-media">
+          <div class="album-card-empty">Coming soon</div>
+        </div>
+        <div class="album-card-meta">
+          <span class="album-card-title">Black &amp; White</span>
+          <span class="album-card-count">0</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Portfolio</p>
+  </footer>
+</body>
+</html>

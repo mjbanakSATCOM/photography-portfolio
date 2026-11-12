@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Black &amp; White — Portfolio</title>
+  <meta name="description" content="Black and white photographs. This collection is coming soon.">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="../index.html">Portfolio</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    <header class="page-header">
+      <h1>Black &amp; White</h1>
+      <p>Coming soon</p>
+    </header>
+
+    <!--
+      To add photographs later:
+      1. Place web images in ../images/black-white/ using the existing naming:
+         img-XXXX.jpg and img-XXXX-thumb.jpg (plus optional .webp companions).
+         Long edge ~2400px for the full image, ~800px for the thumb.
+         Strip location/EXIF metadata before publishing.
+      2. Change the count in the page header above.
+      3. Replace the empty-state block with a .photo-grid and one .photo-link
+         per image, following the markup in the other album pages. Example:
+
+      <div class="photo-grid">
+        <a class="photo-link"
+           href="../images/black-white/img-0000.jpg"
+           data-full-jpg="../images/black-white/img-0000.jpg"
+           data-full-webp="../images/black-white/img-0000.webp"
+           data-width="2400"
+           data-height="1600"
+           data-alt="Black &amp; White, photo 1">
+          <picture>
+            <source type="image/webp" srcset="../images/black-white/img-0000-thumb.webp">
+            <img src="../images/black-white/img-0000-thumb.jpg" alt="Black &amp; White, photo 1" width="800" height="533" loading="lazy">
+          </picture>
+        </a>
+      </div>
+
+      4. Keep the lightbox script at the bottom of this page.
+      5. Update the album card on the home page (replace the Coming soon
+         placeholder with a cover thumb, and update the count).
+    -->
+    <div class="empty-state">
+      <p>Coming soon</p>
+      <p class="hint">Photographs for this album have not been added yet.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Portfolio</p>
+  </footer>
+  <script src="../js/lightbox.js" defer></script>
+</body>
+</html>
