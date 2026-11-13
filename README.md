@@ -1,4 +1,4 @@
-# MJB Photography
+# Lantern & Leaf Photography
 
 A dark, minimal static photography site. No build step: plain HTML, CSS, and a little vanilla JavaScript.
 
