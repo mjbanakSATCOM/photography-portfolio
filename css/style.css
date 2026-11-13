@@ -924,18 +924,6 @@ body.lightbox-open {
   filter: drop-shadow(0 0 10px rgba(217, 164, 65, 0.45));
 }
 
-.hero-emblem {
-  display: block;
-  width: min(50vh, 78vw, 440px);
-  height: auto;
-  margin: -1.5rem auto -1.25rem;
-  filter: drop-shadow(0 0 40px rgba(217, 164, 65, 0.18)) drop-shadow(0 6px 24px rgba(0, 0, 0, 0.5));
-}
-
-.home .hero-content {
-  padding-top: 5rem;
-}
-
 .footer-badge {
   width: 40px;
   height: 40px;
@@ -955,13 +943,5 @@ body.lightbox-open {
 
   .brand-wordmark {
     height: 36px;
-  }
-
-  .home .hero-content {
-    padding-top: 8rem;
-  }
-
-  .hero-emblem {
-    width: min(46vh, 80vw, 330px);
   }
 }
