@@ -884,3 +884,84 @@ body.lightbox-open {
     transform: none !important;
   }
 }
+
+/* Brand: Leaf Studio logo package (nav lockup, hero emblem, footer badge) */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.2rem 0;
+}
+
+.brand-badge {
+  width: 48px;
+  height: 48px;
+}
+
+.brand-wordmark {
+  width: auto;
+  height: 42px;
+}
+
+.brand-lockup:hover {
+  text-shadow: none;
+}
+
+.brand-lockup:hover .brand-badge {
+  filter: drop-shadow(0 0 10px rgba(217, 164, 65, 0.45));
+}
+
+.hero-emblem {
+  display: block;
+  width: min(50vh, 78vw, 440px);
+  height: auto;
+  margin: -1.5rem auto -1.25rem;
+  filter: drop-shadow(0 0 40px rgba(217, 164, 65, 0.18)) drop-shadow(0 6px 24px rgba(0, 0, 0, 0.5));
+}
+
+.home .hero-content {
+  padding-top: 5rem;
+}
+
+.footer-badge {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 0.8rem;
+  opacity: 0.92;
+}
+
+@media (max-width: 560px) {
+  .brand-lockup {
+    gap: 0.55rem;
+  }
+
+  .brand-badge {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-wordmark {
+    height: 36px;
+  }
+
+  .home .hero-content {
+    padding-top: 8rem;
+  }
+
+  .hero-emblem {
+    width: min(46vh, 80vw, 330px);
+  }
+}

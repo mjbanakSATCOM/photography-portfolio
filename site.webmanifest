@@ -1,0 +1,11 @@
+{
+  "name": "Lantern & Leaves Photography",
+  "short_name": "Lantern & Leaves",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1a14",
+  "theme_color": "#0f1a14",
+  "icons": [
+    { "src": "assets/brand/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
