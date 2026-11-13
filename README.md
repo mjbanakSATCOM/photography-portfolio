@@ -6,8 +6,9 @@ A dark, minimal static photography site. No build step: plain HTML, CSS, and a l
 
 - City & Architecture (`albums/city-architecture.html`)
 - Landscapes (`albums/landscapes.html`)
+- Nature (`albums/nature.html`)
 - Portraits (`albums/portraits.html`)
-- Black & White (`albums/black-white.html`) — no photographs yet; the page shows a coming-soon state
+- Black & White (`albums/black-white.html`)
 
 Processed images live under `images/<album-slug>/`. Originals are kept out of this repository.
 
@@ -17,7 +18,7 @@ Processed images live under `images/<album-slug>/`. Originals are kept out of th
 2. Strip location and other EXIF metadata (keep the file free of `GPS*` tags).
 3. Save files as `images/<album-slug>/img-XXXX.jpg`, `img-XXXX-thumb.jpg`, and matching `.webp` files if you have them.
 4. Add a `.photo-link` block to the album page, using the other album pages as a template. Set `width` and `height` to the real pixel sizes and write alt text as “Album name, photo N”.
-5. Update the photograph count on the album page and the matching card on `index.html`. For Black & White, replace the coming-soon empty state and the home-page placeholder card once the first photo is ready.
+5. Update the photograph count on the album page and the matching card on `index.html`.
 
 ## Contact and about
 
