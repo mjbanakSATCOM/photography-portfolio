@@ -1,5 +1,5 @@
 /* Lantern & Leaves — forest effects: firefly motes, scroll reveals, parallax,
-   lantern-light thumbnails, vine scroll progress, and sparse falling leaves.
+   vine scroll progress, and sparse falling leaves.
    Plain JS, no libraries. Everything motion-related is skipped when the
    visitor prefers reduced motion. */
 (function () {
@@ -8,30 +8,16 @@
   window.__forest = true;
   var doc = document.documentElement;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var hasIO = "IntersectionObserver" in window;
 
   if (reduce || !hasIO) doc.classList.remove("fx");
 
-  var thumbs = Array.prototype.slice.call(document.querySelectorAll(".masonry > a"));
-
-  /* ---- Lantern-light thumbnails ---- */
-  if (canHover) {
-    thumbs.forEach(function (a) {
-      a.addEventListener("pointermove", function (e) {
-        var r = a.getBoundingClientRect();
-        a.style.setProperty("--mx", (e.clientX - r.left) + "px");
-        a.style.setProperty("--my", (e.clientY - r.top) + "px");
-      });
-      a.addEventListener("pointerleave", function () {
-        a.style.removeProperty("--mx");
-        a.style.removeProperty("--my");
-      });
-    });
-  } else if (hasIO) {
-    // Touch: photos warm up as they pass through the middle of the screen.
-    // One-shot: once a photo has been lit it stays lit, so photos don't
-    // dim and brighten (blink) as they scroll in and out of the middle.
+  /* Gallery photos: no reveal animation and no per-frame effects. On touch
+     screens (no hover) a photo lights up once when it reaches the middle of
+     the screen and then stays lit, so nothing dims and brightens while
+     scrolling. On mouse devices CSS :hover does the lighting. */
+  var canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!canHover && hasIO) {
     var litIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
@@ -40,7 +26,7 @@
         }
       });
     }, { rootMargin: "-25% 0px -25% 0px" });
-    thumbs.forEach(function (a) { litIO.observe(a); });
+    Array.prototype.forEach.call(document.querySelectorAll(".masonry > a"), function (a) { litIO.observe(a); });
   }
 
   /* ---- Header state on the home page ---- */
@@ -64,18 +50,11 @@
   /* ---- Reveal-on-scroll ---- */
   var revealEls = [];
   if (doc.classList.contains("fx")) {
-    var groups = document.querySelectorAll(".album-copy, .page-header, .prose, .masonry");
+    // Titles and text fade in; the photo grids never do.
+    var groups = document.querySelectorAll(".album-copy, .page-header, .prose");
     Array.prototype.forEach.call(groups, function (g) {
-      if (g.classList.contains("masonry")) {
-        Array.prototype.forEach.call(g.children, function (item, i) {
-          item.classList.add("reveal");
-          item.style.setProperty("--d", ((i % 8) * 0.07).toFixed(2) + "s");
-          revealEls.push(item);
-        });
-      } else {
-        g.classList.add("reveal");
-        revealEls.push(g);
-      }
+      g.classList.add("reveal");
+      revealEls.push(g);
     });
     var revIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {

@@ -17,8 +17,8 @@
     '<button type="button" class="lightbox-btn lightbox-prev" aria-label="Previous photograph">&#8249;</button>' +
     '<figure class="lightbox-figure">' +
     '  <picture>' +
-    '    <source class="lightbox-webp" type="image/webp" srcset="">' +
-    '    <img class="lightbox-image" src="" alt="">' +
+    '    <source class="lightbox-webp" type="image/webp">' +
+    '    <img class="lightbox-image" alt="">' +
     "  </picture>" +
     '  <figcaption class="lightbox-caption"></figcaption>' +
     "</figure>" +

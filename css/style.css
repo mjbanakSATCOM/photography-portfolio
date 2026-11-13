@@ -528,7 +528,14 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
   transform: translateX(4px);
 }
 
-/* Masonry grid (CSS columns) with lantern-light thumbnails */
+/* Masonry grid (CSS columns) with lantern-dimmed thumbnails.
+   Photos rest slightly dimmed and brighten under the cursor. The dimming is a
+   plain dark veil (::after) whose background-colour fades: a paint-only change
+   that never creates a compositing layer. Nothing inside the columns uses
+   filter, transform, opacity animation, will-change or blend modes, because
+   Chrome and Safari repaint CSS-column items with their own layers unreliably
+   (the photo you just left, or a neighbour, could vanish for a moment while
+   its layer was torn down). Hover adds only a warm amber glow around the photo. */
 
 .masonry {
   column-count: 4;
@@ -536,18 +543,15 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
 }
 
 .masonry > a {
-  --mx: 50%;
-  --my: 50%;
   position: relative;
   display: block;
   break-inside: avoid;
   page-break-inside: avoid;
   margin: 0 0 var(--gutter);
   background: #050806;
-  overflow: hidden;
   border-radius: 2px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  transition: box-shadow 0.6s ease;
+  transition: box-shadow 0.5s ease;
 }
 
 .masonry picture,
@@ -558,40 +562,27 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
   vertical-align: middle;
 }
 
-.masonry img {
-  filter: brightness(0.7) saturate(0.85);
-  transition: filter 0.7s ease, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
 .masonry > a::after {
-  /* the lantern: a warm glow that follows the cursor */
+  /* the dim veil: about the same as brightness(0.7) */
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle 260px at var(--mx) var(--my), rgba(255, 196, 102, 0.26), rgba(217, 164, 65, 0.08) 45%, transparent 72%);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.masonry > a:hover img,
-.masonry > a:focus-visible img,
-.masonry > a.is-lit img {
-  filter: brightness(1.02) saturate(1);
-  transform: scale(1.025);
+  border-radius: inherit;
+  background-color: rgba(5, 8, 6, 0.3);
+  transition: background-color 0.6s ease;
 }
 
 .masonry > a:hover::after,
 .masonry > a:focus-visible::after,
 .masonry > a.is-lit::after {
-  opacity: 1;
+  background-color: rgba(5, 8, 6, 0);
 }
 
 .masonry > a:hover,
 .masonry > a:focus-visible,
 .masonry > a.is-lit {
-  box-shadow: 0 0 0 1px rgba(217, 164, 65, 0.28), 0 0 34px rgba(217, 164, 65, 0.16), 0 14px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px rgba(217, 164, 65, 0.35), 0 0 26px rgba(217, 164, 65, 0.22), 0 14px 40px rgba(0, 0, 0, 0.45);
 }
 
 .photo-link {
@@ -615,7 +606,7 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
 .fx .reveal.is-done {
   opacity: 1;
   transform: none;
-  transition: box-shadow 0.6s ease;
+  transition: none;
   transition-delay: 0s;
 }
 
