@@ -16,8 +16,9 @@
   --gutter: 1.1rem;
   --page-pad: clamp(1.25rem, 3.5vw, 3.25rem);
   --font: "Poppins", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
-  --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
-  --display: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --display: "Playfair Display", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --accent-font: "Playfair Display", Georgia, serif; /* italic */
 }
 
 *,
@@ -222,8 +223,9 @@ button:focus-visible {
 .hero-eyebrow {
   margin: 0 0 1.1rem;
   font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.42em;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  padding-left: 0.45em;
   text-transform: uppercase;
   color: var(--amber);
   opacity: 0.9;
@@ -232,18 +234,19 @@ button:focus-visible {
 .hero-title {
   margin: 0;
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 500;
   font-size: clamp(2.6rem, 8vw, 6.2rem);
-  line-height: 1.02;
-  letter-spacing: 0.06em;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
   color: var(--text);
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55), 0 0 60px rgba(217, 164, 65, 0.18);
 }
 
 .hero-title .amp {
-  font-family: var(--serif);
+  font-family: var(--accent-font);
   font-style: italic;
   font-weight: 500;
+  font-size: 1.06em;
   color: var(--amber);
   text-shadow: 0 0 24px rgba(217, 164, 65, 0.55);
 }
@@ -253,9 +256,11 @@ button:focus-visible {
   margin-top: 0.6rem;
   font-family: var(--display);
   font-size: clamp(0.72rem, 1.6vw, 0.95rem);
-  letter-spacing: 0.55em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.45em;
   color: var(--soft);
-  padding-left: 0.55em;
+  padding-left: 0.45em;
 }
 
 .hero-rule {
@@ -282,12 +287,18 @@ button:focus-visible {
 
 .hero-tagline {
   margin: 0;
-  font-family: var(--serif);
+  font-family: var(--accent-font);
   font-style: italic;
   font-size: clamp(1.2rem, 2.4vw, 1.6rem);
-  font-weight: 500;
-  color: var(--soft);
+  font-weight: 400;
+  color: #d9a441;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.6);
 }
+
+/* Leaf Studio Playfair typography */
+h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
+.tagline, .accent { font-family: var(--accent-font); font-style: italic; font-weight: 400; }
+.eyebrow { font-family: var(--display); font-weight: 500; text-transform: uppercase; letter-spacing: .45em; }
 
 .scroll-cue {
   position: absolute;
@@ -486,10 +497,10 @@ button:focus-visible {
 
 .album-subtitle {
   margin: 0 0 0.9rem;
-  font-family: var(--serif);
+  font-family: var(--accent-font);
   font-style: italic;
-  font-size: 1.15rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 400;
   color: var(--soft);
 }
 
@@ -823,11 +834,11 @@ button:focus-visible {
 
 .lightbox-caption {
   margin: 1.1rem 0 0;
-  font-family: var(--serif);
+  font-family: var(--accent-font);
   font-style: italic;
-  font-size: 1.05rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-size: 1.02rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   color: var(--soft);
 }
 
@@ -916,8 +927,9 @@ body.lightbox-open {
   }
 
   .hero-eyebrow {
-    letter-spacing: 0.28em;
-    font-size: 0.62rem;
+    letter-spacing: 0.45em;
+    font-size: 0.58rem;
+    line-height: 1.9;
   }
 
   .hero-sub {
@@ -1018,20 +1030,21 @@ body.lightbox-open {
   display: block;
   text-align: center;
   font-family: var(--display);
-  font-size: 1.02rem;
-  font-weight: 400;
+  font-size: 1.12rem;
+  font-weight: 500;
   line-height: 1.1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
   white-space: nowrap;
   color: var(--text);
   transition: color 0.3s ease;
 }
 
 .brand-name .amp {
-  font-family: var(--serif);
+  font-family: var(--accent-font);
   font-style: italic;
   font-weight: 500;
+  font-size: 1.06em;
   text-transform: none;
   color: var(--amber);
 }
@@ -1040,8 +1053,10 @@ body.lightbox-open {
   display: block;
   margin-top: 0.28rem;
   font-size: 0.5rem;
-  letter-spacing: 0.55em;
-  padding-left: 0.55em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.45em;
+  padding-left: 0.45em;
   color: var(--soft);
 }
 
