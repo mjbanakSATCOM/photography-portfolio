@@ -373,8 +373,9 @@ button:focus-visible {
 }
 
 .album-copy {
-  margin-top: 2.5rem;
+  margin: 0 auto 2.5rem;
   max-width: 40rem;
+  text-align: center;
 }
 
 .album-copy h2,
@@ -397,6 +398,13 @@ button:focus-visible {
   height: 1px;
   margin-bottom: 0.9rem;
   background: linear-gradient(90deg, var(--amber), transparent);
+}
+
+.album-copy h2::before,
+.page-header h1::before {
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
 }
 
 .album-subtitle {
@@ -620,6 +628,7 @@ button:focus-visible {
 
 .page-header {
   margin: 0 0 2.5rem;
+  text-align: center;
 }
 
 .page-header .photo-count {
@@ -837,7 +846,7 @@ body.lightbox-open {
   }
 
   .album-copy {
-    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
   }
 
   .vine {
