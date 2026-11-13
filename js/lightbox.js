@@ -31,6 +31,13 @@
   var btnClose = root.querySelector(".lightbox-close");
   var btnPrev = root.querySelector(".lightbox-prev");
   var btnNext = root.querySelector(".lightbox-next");
+  var clearTimer = 0;
+
+  function loaded() {
+    root.classList.remove("is-loading");
+  }
+  img.addEventListener("load", loaded);
+  img.addEventListener("error", loaded);
 
   function photoData(link) {
     return {
@@ -53,7 +60,11 @@
     } else {
       webp.removeAttribute("srcset");
     }
-    img.src = data.jpg;
+    if (img.getAttribute("src") !== data.jpg) {
+      root.classList.add("is-loading");
+      img.src = data.jpg;
+      if (img.complete && img.naturalWidth) loaded();
+    }
     caption.textContent = data.alt + "  ·  " + (index + 1) + " of " + links.length;
     btnPrev.disabled = links.length < 2;
     btnNext.disabled = links.length < 2;
@@ -61,6 +72,10 @@
 
   function open(i) {
     lastFocus = document.activeElement;
+    if (clearTimer) {
+      clearTimeout(clearTimer);
+      clearTimer = 0;
+    }
     show(i);
     root.classList.add("is-open");
     document.body.classList.add("lightbox-open");
@@ -70,8 +85,12 @@
   function close() {
     root.classList.remove("is-open");
     document.body.classList.remove("lightbox-open");
-    img.src = "";
-    webp.removeAttribute("srcset");
+    // Let the fade-out finish before clearing the image.
+    clearTimer = setTimeout(function () {
+      clearTimer = 0;
+      img.removeAttribute("src");
+      webp.removeAttribute("srcset");
+    }, 500);
     if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
   }
 
