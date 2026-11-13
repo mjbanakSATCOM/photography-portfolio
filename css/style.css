@@ -901,19 +901,20 @@ body.lightbox-open {
 
 .brand-lockup {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.2rem 0;
+  gap: 0.3rem;
+  padding: 0.1rem 0;
 }
 
 .brand-badge {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
 }
 
 .brand-wordmark {
-  width: auto;
-  height: 42px;
+  width: 150px;
+  height: auto;
 }
 
 .brand-lockup:hover {
@@ -933,15 +934,15 @@ body.lightbox-open {
 
 @media (max-width: 560px) {
   .brand-lockup {
-    gap: 0.55rem;
+    gap: 0.25rem;
   }
 
   .brand-badge {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
 
   .brand-wordmark {
-    height: 36px;
+    width: 140px;
   }
 }
