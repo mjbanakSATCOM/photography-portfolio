@@ -912,6 +912,11 @@ body.lightbox-open {
   height: 40px;
 }
 
+.brand-badge-pic,
+.footer-badge-pic {
+  display: block;
+}
+
 .brand-name {
   display: block;
   text-align: center;
