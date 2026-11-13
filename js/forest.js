@@ -30,9 +30,14 @@
     });
   } else if (hasIO) {
     // Touch: photos warm up as they pass through the middle of the screen.
+    // One-shot: once a photo has been lit it stays lit, so photos don't
+    // dim and brighten (blink) as they scroll in and out of the middle.
     var litIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        en.target.classList.toggle("is-lit", en.isIntersecting);
+        if (en.isIntersecting) {
+          en.target.classList.add("is-lit");
+          litIO.unobserve(en.target);
+        }
       });
     }, { rootMargin: "-25% 0px -25% 0px" });
     thumbs.forEach(function (a) { litIO.observe(a); });
@@ -75,8 +80,19 @@
     var revIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
-          en.target.classList.add("is-visible");
-          revIO.unobserve(en.target);
+          var el = en.target;
+          el.classList.add("is-visible");
+          revIO.unobserve(el);
+          // After the first fade-in, settle the element (no transform or
+          // transition left on it) so it can never flicker while scrolling.
+          var settle = function () { el.classList.add("is-done"); };
+          el.addEventListener("transitionend", function onEnd(e) {
+            if (e.target === el && e.propertyName === "opacity") {
+              el.removeEventListener("transitionend", onEnd);
+              settle();
+            }
+          });
+          setTimeout(settle, 2200);
         }
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
