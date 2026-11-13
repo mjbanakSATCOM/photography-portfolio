@@ -912,9 +912,39 @@ body.lightbox-open {
   height: 40px;
 }
 
-.brand-wordmark {
-  width: 150px;
-  height: auto;
+.brand-name {
+  display: block;
+  text-align: center;
+  font-family: var(--display);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.brand-name .amp {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+  color: var(--amber);
+}
+
+.brand-sub {
+  display: block;
+  margin-top: 0.28rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.55em;
+  padding-left: 0.55em;
+  color: var(--soft);
+}
+
+.brand-lockup:hover .brand-name {
+  color: var(--text);
 }
 
 .brand-lockup:hover {
@@ -942,7 +972,7 @@ body.lightbox-open {
     height: 36px;
   }
 
-  .brand-wordmark {
-    width: 140px;
+  .brand-name {
+    font-size: 0.95rem;
   }
 }
