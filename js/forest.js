@@ -1,4 +1,4 @@
-/* Lantern & Leaf — forest effects: firefly motes, scroll reveals, parallax,
+/* Lantern & Leaves — forest effects: firefly motes, scroll reveals, parallax,
    lantern-light thumbnails, vine scroll progress, and sparse falling leaves.
    Plain JS, no libraries. Everything motion-related is skipped when the
    visitor prefers reduced motion. */
