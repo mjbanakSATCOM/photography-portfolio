@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lantern &amp; Leaf Photography</title>
   <meta name="description" content="A photography portfolio with collections of city and architecture, landscapes, nature, portraits, and black and white work.">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#111111">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,122 +16,272 @@
   <header class="site-header">
     <a class="site-title" href="index.html" aria-current="page">Lantern &amp; Leaf Photography</a>
     <nav class="site-nav" aria-label="Primary">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="albums/city-architecture.html">City &amp; Architecture</a>
+      <a href="albums/landscapes.html">Landscapes</a>
+      <a href="albums/nature.html">Nature</a>
+      <a href="albums/portraits.html">Portraits</a>
+      <a href="albums/black-white.html">Black &amp; White</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main class="site-main">
-    <section class="hero" aria-label="Featured photograph">
-      <picture>
-        <source type="image/webp" srcset="images/landscapes/img-3663.webp">
-        <img
-          src="images/landscapes/img-3663.jpg"
-          alt="Landscapes, photo 3"
-          width="2400"
-          height="1361"
-          fetchpriority="high"
-        >
-      </picture>
-    </section>
-
-    <h1 class="section-label" id="albums">Albums</h1>
-    <div class="album-grid">
-      <a class="album-card" href="albums/city-architecture.html">
-        <div class="album-card-media">
+  <main>
+    <section class="album-section" id="city-architecture" aria-labelledby="city-architecture-title">
+      <div class="album-section-inner">
+        <div class="masonry">
+        <a class="masonry-item" href="albums/city-architecture.html">
+          <picture>
+            <source type="image/webp" srcset="images/city-architecture/img-0807-thumb.webp">
+            <img src="images/city-architecture/img-0807-thumb.jpg" alt="City &amp; Architecture, photo 1" width="800" height="600"
+          fetchpriority="high">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/city-architecture.html">
           <picture>
             <source type="image/webp" srcset="images/city-architecture/img-1101-thumb.webp">
-            <img
-              src="images/city-architecture/img-1101-thumb.jpg"
-              alt=""
-              width="800"
-              height="600"
-              loading="lazy"
-            >
+            <img src="images/city-architecture/img-1101-thumb.jpg" alt="City &amp; Architecture, photo 2" width="800" height="600" loading="lazy">
           </picture>
+        </a>
+        <a class="masonry-item" href="albums/city-architecture.html">
+          <picture>
+            <source type="image/webp" srcset="images/city-architecture/img-1131-thumb.webp">
+            <img src="images/city-architecture/img-1131-thumb.jpg" alt="City &amp; Architecture, photo 3" width="600" height="800" loading="lazy">
+          </picture>
+        </a>
         </div>
-        <div class="album-card-meta">
-          <span class="album-card-title">City &amp; Architecture</span>
-          <span class="album-card-count">3</span>
+        <div class="album-copy">
+          <h2 id="city-architecture-title">City &amp; Architecture</h2>
+          <p class="album-subtitle">Form, structure and light</p>
+          <a class="view-album" href="albums/city-architecture.html">View Album <span aria-hidden="true">→</span></a>
         </div>
-      </a>
-
-      <a class="album-card" href="albums/landscapes.html">
-        <div class="album-card-media">
+      </div>
+    </section>
+    <section class="album-section" id="landscapes" aria-labelledby="landscapes-title">
+      <div class="album-section-inner">
+        <div class="masonry">
+        <a class="masonry-item" href="albums/landscapes.html">
           <picture>
             <source type="image/webp" srcset="images/landscapes/img-0497-thumb.webp">
-            <img
-              src="images/landscapes/img-0497-thumb.jpg"
-              alt=""
-              width="800"
-              height="600"
-              loading="lazy"
-            >
+            <img src="images/landscapes/img-0497-thumb.jpg" alt="Landscapes, photo 1" width="800" height="600" loading="lazy">
           </picture>
-        </div>
-        <div class="album-card-meta">
-          <span class="album-card-title">Landscapes</span>
-          <span class="album-card-count">11</span>
-        </div>
-      </a>
-
-      <a class="album-card" href="albums/portraits.html">
-        <div class="album-card-media">
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
           <picture>
-            <source type="image/webp" srcset="images/portraits/img-0870-thumb.webp">
-            <img
-              src="images/portraits/img-0870-thumb.jpg"
-              alt=""
-              width="800"
-              height="635"
-              loading="lazy"
-            >
+            <source type="image/webp" srcset="images/landscapes/img-2691-thumb.webp">
+            <img src="images/landscapes/img-2691-thumb.jpg" alt="Landscapes, photo 2" width="800" height="600" loading="lazy">
           </picture>
-        </div>
-        <div class="album-card-meta">
-          <span class="album-card-title">Portraits</span>
-          <span class="album-card-count">4</span>
-        </div>
-      </a>
-
-      <a class="album-card" href="albums/black-white.html">
-        <div class="album-card-media">
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
           <picture>
-            <source type="image/webp" srcset="images/black-white/bw-01-thumb.webp">
-            <img
-              src="images/black-white/bw-01-thumb.jpg"
-              alt=""
-              width="800"
-              height="574"
-              loading="lazy"
-            >
+            <source type="image/webp" srcset="images/landscapes/img-3663-thumb.webp">
+            <img src="images/landscapes/img-3663-thumb.jpg" alt="Landscapes, photo 3" width="800" height="454" loading="lazy">
           </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/img-4567-thumb.webp">
+            <img src="images/landscapes/img-4567-thumb.jpg" alt="Landscapes, photo 4" width="800" height="456" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/fb-556583759-thumb.webp">
+            <img src="images/landscapes/fb-556583759-thumb.jpg" alt="Landscapes, photo 5" width="800" height="528" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/morning-glory-thumb.webp">
+            <img src="images/landscapes/morning-glory-thumb.jpg" alt="Morning Glory" width="800" height="517" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/studly-royal-summer-thumb.webp">
+            <img src="images/landscapes/studly-royal-summer-thumb.jpg" alt="Studly Royal Summer" width="800" height="214" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/whitby-evening-tide-thumb.webp">
+            <img src="images/landscapes/whitby-evening-tide-thumb.jpg" alt="Whitby Evening Tide" width="800" height="402" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/whitby-evening-thumb.webp">
+            <img src="images/landscapes/whitby-evening-thumb.jpg" alt="Whitby Evening" width="800" height="333" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/whitby-harbor-2-thumb.webp">
+            <img src="images/landscapes/whitby-harbor-2-thumb.jpg" alt="Whitby Harbor 2" width="800" height="533" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/landscapes.html">
+          <picture>
+            <source type="image/webp" srcset="images/landscapes/whitby-harbor-thumb.webp">
+            <img src="images/landscapes/whitby-harbor-thumb.jpg" alt="Whitby Harbor" width="800" height="533" loading="lazy">
+          </picture>
+        </a>
         </div>
-        <div class="album-card-meta">
-          <span class="album-card-title">Black &amp; White</span>
-          <span class="album-card-count">32</span>
-    
-      <a class="album-card" href="albums/nature.html">
-        <div class="album-card-media">
+        <div class="album-copy">
+          <h2 id="landscapes-title">Landscapes</h2>
+          <p class="album-subtitle">Land, sky and open space</p>
+          <a class="view-album" href="albums/landscapes.html">View Album <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="album-section" id="nature" aria-labelledby="nature-title">
+      <div class="album-section-inner">
+        <div class="masonry">
+        <a class="masonry-item" href="albums/nature.html">
           <picture>
             <source type="image/webp" srcset="images/nature/autumn-light-thumb.webp">
-            <img
-              src="images/nature/autumn-light-thumb.jpg"
-              alt=""
-              width="800"
-              height="470"
-              loading="lazy"
-            >
+            <img src="images/nature/autumn-light-thumb.jpg" alt="Autumn Light" width="800" height="470" loading="lazy">
           </picture>
+        </a>
+        <a class="masonry-item" href="albums/nature.html">
+          <picture>
+            <source type="image/webp" srcset="images/nature/catching-the-light-thumb.webp">
+            <img src="images/nature/catching-the-light-thumb.jpg" alt="Catching the Light" width="533" height="800" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/nature.html">
+          <picture>
+            <source type="image/webp" srcset="images/nature/horse-and-sun-thumb.webp">
+            <img src="images/nature/horse-and-sun-thumb.jpg" alt="Horse and Sun" width="531" height="800" loading="lazy">
+          </picture>
+        </a>
         </div>
-        <div class="album-card-meta">
-          <span class="album-card-title">Nature</span>
-          <span class="album-card-count">3</span>
+        <div class="album-copy">
+          <h2 id="nature-title">Nature</h2>
+          <p class="album-subtitle">Leaves, light and living things</p>
+          <a class="view-album" href="albums/nature.html">View Album <span aria-hidden="true">→</span></a>
         </div>
-      </a>
-    </div>
-      </a>
-    </div>
+      </div>
+    </section>
+    <section class="album-section" id="portraits" aria-labelledby="portraits-title">
+      <div class="album-section-inner">
+        <div class="masonry">
+        <a class="masonry-item" href="albums/portraits.html">
+          <picture>
+            <source type="image/webp" srcset="images/portraits/img-0870-thumb.webp">
+            <img src="images/portraits/img-0870-thumb.jpg" alt="Portraits, photo 1" width="800" height="635" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/portraits.html">
+          <picture>
+            <source type="image/webp" srcset="images/portraits/fb-36451459-thumb.webp">
+            <img src="images/portraits/fb-36451459-thumb.jpg" alt="Portraits, photo 2" width="525" height="800" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/portraits.html">
+          <picture>
+            <source type="image/webp" srcset="images/portraits/ally-thumb.webp">
+            <img src="images/portraits/ally-thumb.jpg" alt="Ally" width="800" height="534" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/portraits.html">
+          <picture>
+            <source type="image/webp" srcset="images/portraits/summer-eve-thumb.webp">
+            <img src="images/portraits/summer-eve-thumb.jpg" alt="Summer Eve" width="569" height="800" loading="lazy">
+          </picture>
+        </a>
+        </div>
+        <div class="album-copy">
+          <h2 id="portraits-title">Portraits</h2>
+          <p class="album-subtitle">People and presence</p>
+          <a class="view-album" href="albums/portraits.html">View Album <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="album-section" id="black-white" aria-labelledby="black-white-title">
+      <div class="album-section-inner">
+        <div class="masonry">
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-01-thumb.webp">
+            <img src="images/black-white/bw-01-thumb.jpg" alt="Black &amp; White, photo 1" width="800" height="574" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-02-thumb.webp">
+            <img src="images/black-white/bw-02-thumb.jpg" alt="Black &amp; White, photo 2" width="588" height="800" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-03-thumb.webp">
+            <img src="images/black-white/bw-03-thumb.jpg" alt="Black &amp; White, photo 3" width="800" height="670" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-04-thumb.webp">
+            <img src="images/black-white/bw-04-thumb.jpg" alt="Black &amp; White, photo 4" width="800" height="722" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-05-thumb.webp">
+            <img src="images/black-white/bw-05-thumb.jpg" alt="Black &amp; White, photo 5" width="800" height="547" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-06-thumb.webp">
+            <img src="images/black-white/bw-06-thumb.jpg" alt="Black &amp; White, photo 6" width="800" height="572" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-07-thumb.webp">
+            <img src="images/black-white/bw-07-thumb.jpg" alt="Black &amp; White, photo 7" width="800" height="548" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-08-thumb.webp">
+            <img src="images/black-white/bw-08-thumb.jpg" alt="Black &amp; White, photo 8" width="800" height="589" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-09-thumb.webp">
+            <img src="images/black-white/bw-09-thumb.jpg" alt="Black &amp; White, photo 9" width="800" height="676" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-10-thumb.webp">
+            <img src="images/black-white/bw-10-thumb.jpg" alt="Black &amp; White, photo 10" width="800" height="589" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-11-thumb.webp">
+            <img src="images/black-white/bw-11-thumb.jpg" alt="Black &amp; White, photo 11" width="800" height="585" loading="lazy">
+          </picture>
+        </a>
+        <a class="masonry-item" href="albums/black-white.html">
+          <picture>
+            <source type="image/webp" srcset="images/black-white/bw-12-thumb.webp">
+            <img src="images/black-white/bw-12-thumb.jpg" alt="Black &amp; White, photo 12" width="800" height="516" loading="lazy">
+          </picture>
+        </a>
+        </div>
+        <div class="album-copy">
+          <h2 id="black-white-title">Black &amp; White</h2>
+          <p class="album-subtitle">Light, shadow and texture</p>
+          <a class="view-album" href="albums/black-white.html">View Album <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
