@@ -214,7 +214,7 @@ button:focus-visible {
 }
 
 .hero-content {
-  padding: 6rem var(--page-pad) calc(4rem + 130px);
+  padding: 6rem var(--page-pad) calc(4rem + 50px);
   max-width: 54rem;
   will-change: transform, opacity;
 }
@@ -320,7 +320,7 @@ button:focus-visible {
    halo/camera canvas is 870x1024 with the lantern centred at 58.85% scale. */
 
 .cue-lantern {
-  --lh: 150px;
+  --lh: 75px;
   position: relative;
   display: block;
   width: calc(var(--lh) * 0.5827);
@@ -335,6 +335,13 @@ button:focus-visible {
   height: calc(var(--lh) * 1.8417);
   transform: translate(-50%, -50%);
   pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+}
+
+.scroll-cue:hover .cue-lantern-canvas,
+.scroll-cue:focus-visible .cue-lantern-canvas {
+  opacity: 0.9;
 }
 
 .cue-lantern-canvas picture {
@@ -911,7 +918,7 @@ body.lightbox-open {
   }
 
   .cue-lantern {
-    --lh: 110px;
+    --lh: 55px;
   }
 
   .scroll-cue {
