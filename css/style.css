@@ -1090,3 +1090,133 @@ body.lightbox-open {
     font-size: 0.95rem;
   }
 }
+
+
+/* Hero verses (left) and quotes (right). Small text blocks, opacity-only fades. */
+
+.hq-side,
+.hq-line {
+  display: none;
+}
+
+.hq-item {
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 0 18px rgba(0, 0, 0, 0.65);
+}
+
+.hq-item.is-on {
+  opacity: 1;
+}
+
+.hq-text {
+  margin: 0;
+  font-family: var(--accent-font);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: rgba(243, 230, 207, 0.92);
+}
+
+.hq-ref {
+  margin: 0.6rem 0 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.hq-ref::before {
+  content: "";
+  display: inline-block;
+  width: 1.4rem;
+  height: 1px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  background: var(--amber);
+  opacity: 0.7;
+}
+
+@media (min-width: 1240px) and (min-height: 600px) {
+  .hq-side {
+    display: block;
+    position: absolute;
+    top: 118px;
+    bottom: 150px;
+    /* the free space beside the title (title, eyebrow and tagline stay
+       inside the central ~730px) */
+    width: min(300px, calc((100vw - 730px) / 2 - var(--page-pad) - 28px));
+    z-index: 1;
+    pointer-events: none;
+    text-align: left;
+  }
+
+  .hq-left {
+    left: var(--page-pad);
+  }
+
+  .hq-right {
+    right: var(--page-pad);
+  }
+
+  .hq-side .hq-item {
+    position: absolute;
+    width: calc(100% - 24px);
+  }
+}
+
+@media not all and (min-width: 1240px) and (min-height: 600px) {
+  .hq-line {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 8.6rem;
+    max-width: 34rem;
+    margin: 1.2rem auto 0;
+    pointer-events: none;
+  }
+
+  .hq-line .hq-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .hq-line .hq-ref {
+    margin-top: 0.45rem;
+  }
+
+  .hq-line .hq-ref::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hq-line {
+    height: auto;
+  }
+
+  .hq-second {
+    margin-top: 1rem;
+  }
+}
+
+.lsb-notice {
+  max-width: 46rem;
+  margin: 0.8rem auto 0 !important;
+  font-family: var(--font);
+  font-size: 0.62rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--muted);
+}
+
+.lsb-notice a {
+  color: var(--soft);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
