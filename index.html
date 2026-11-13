@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/brand/raster/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/raster/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/brand/raster/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/raster/apple-touch-icon-180.png">
   <link rel="manifest" href="site.webmanifest">
   <meta property="og:type" content="website">
@@ -59,7 +58,21 @@
         <div class="hero-rule" aria-hidden="true">&#10022;</div>
         <p class="hero-tagline">Wanderings in light and leaf</p>
       </div>
-      <a class="scroll-cue" href="#black-white">Enter the galleries</a>
+      <a class="scroll-cue" href="#black-white">
+        <span class="scroll-cue-text">Enter the galleries</span>
+        <span class="cue-lantern">
+          <span class="cue-lantern-canvas">
+            <picture>
+              <source type="image/webp" srcset="assets/brand/lantern/lantern-glow-halo-512.webp 435w, assets/brand/lantern/lantern-glow-halo-1024.webp 870w" sizes="(max-width: 560px) 172px, 235px">
+              <img class="cue-halo" src="assets/brand/lantern/lantern-glow-halo-512.png" srcset="assets/brand/lantern/lantern-glow-halo-512.png 435w, assets/brand/lantern/lantern-glow-halo-1024.png 870w" sizes="(max-width: 560px) 172px, 235px" alt="" width="870" height="1024">
+            </picture>
+            <picture>
+              <source type="image/webp" srcset="assets/brand/lantern/lantern-camera-1024.webp">
+              <img class="cue-camera" src="assets/brand/lantern/lantern-camera-512.png" srcset="assets/brand/lantern/lantern-camera-512.png 315w, assets/brand/lantern/lantern-camera-1024.png 630w" sizes="(max-width: 560px) 101px, 138px" alt="Lantern lighting the way to the galleries" width="630" height="1024">
+            </picture>
+          </span>
+        </span>
+      </a>
     </section>
     <section class="album-section" id="black-white" aria-labelledby="black-white-title">
       <div class="album-section-inner">
