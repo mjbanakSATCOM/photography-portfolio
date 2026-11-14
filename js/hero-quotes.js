@@ -92,7 +92,7 @@
 
   var hero = document.querySelector(".hero");
   if (!hero) return;
-  var FADE = 1200, HOLD = 5000, STAGGER = 2500;
+  var FADE = 1200, HOLD = 7000, STAGGER = 3500;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var sideMQ = window.matchMedia("(min-width: 1240px) and (min-height: 600px)");
 
@@ -253,7 +253,7 @@
     }
     if (side) {
       left.start(300, 0);
-      right.start(300, STAGGER);    // right holds 2.5s longer the first time
+      right.start(300, STAGGER);    // right holds 3.5s longer the first time
     } else {
       line.start(300);
     }
