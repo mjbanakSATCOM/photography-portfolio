@@ -96,8 +96,12 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var sideMQ = window.matchMedia("(min-width: 1240px) and (min-height: 600px)");
 
-  // slot = fraction of the free vertical band + small horizontal offset (px)
-  var SLOTS = [[0.11, 0], [0.5, 16], [0.96, 6], [0.27, 22], [0.73, 10]];
+  // Placement (desktop): verses lean left, quotes lean right. Spots above and
+  // below the title block are used only when they keep the full CLEAR (~2in);
+  // side spots hug the block at CLEAR, or at the most clearance the window
+  // allows while keeping a readable block width (MINW).
+  var CLEAR = 192, MINW = 180, MAXW = 300, EDGE = 24;
+  var SIDE_Y = [0.06, 0.3, 0.5, 0.7, 0.94], TB_X = [0.12, 0.6];
 
   function bag(items) {             // shuffle bag: no repeats until all shown
     var order = [], last = -1;
@@ -136,14 +140,67 @@
   function sideCycler(side, items) {
     var box = hero.querySelector(".hq-" + side);
     var el = box.querySelector(".hq-item");
-    var next = bag(items), lastSlot = -1;
+    var next = bag(items), lastSlot = "";
+    var L = side === "left";
+    function rel(sel, text) {
+      var e = hero.querySelector(sel) || document.querySelector(sel), r;
+      if (!e) return null;
+      if (text) { var g = document.createRange(); g.selectNodeContents(e); r = g.getBoundingClientRect(); }
+      else r = e.getBoundingClientRect();
+      var h = hero.getBoundingClientRect();
+      return { l: r.left - h.left, t: r.top - h.top, r: r.right - h.left, b: r.bottom - h.top };
+    }
+    function hits(a, b, m) {
+      return b && a.l < b.r + m && b.l < a.r + m && a.t < b.b + m && b.t < a.b + m;
+    }
+    function heightAt(w) { el.style.width = w + "px"; return el.offsetHeight; }
+    function candidates() {
+      var W = hero.clientWidth, H = hero.clientHeight;
+      var hc = hero.querySelector(".hero-content");
+      var pad = (hc && parseFloat(getComputedStyle(hc).paddingLeft)) || 40;
+      var parts = [rel(".hero-eyebrow", true), rel(".hero-name", true), rel(".hero-tagline", true)].filter(Boolean);
+      var blk = { l: Math.min.apply(0, parts.map(function (p) { return p.l; })),
+                  t: Math.min.apply(0, parts.map(function (p) { return p.t; })),
+                  r: Math.max.apply(0, parts.map(function (p) { return p.r; })),
+                  b: Math.max.apply(0, parts.map(function (p) { return p.b; })) };
+      var head = rel(".site-header"), cue = rel(".scroll-cue");
+      var top = (head ? Math.max(0, head.b) : 0) + EDGE, bottom = H - EDGE;
+      var room = L ? blk.l - pad : W - pad - blk.r;            // beside the block
+      var cs = Math.max(EDGE, Math.min(CLEAR, room - MINW));   // side clearance
+      var sw = Math.min(MAXW, room - cs), out = [];
+      function add(id, x, y, w, h, clear) {
+        var c = { l: x, t: y, r: x + w, b: y + h };
+        if (w < MINW || c.l < pad - 1 || c.r > W - pad + 1 || c.t < top || c.b > bottom) return;
+        if (hits(c, blk, clear - 1) || hits(c, cue, 16)) return;
+        if (L ? c.r > W / 2 - 12 : c.l < W / 2 + 12) return;   // own half only
+        out.push({ id: id, x: x, y: y, w: w, clear: clear });
+      }
+      if (sw >= MINW) {
+        var sh = heightAt(sw);
+        SIDE_Y.forEach(function (f, i) {
+          add("S" + i, L ? blk.l - cs - sw : blk.r + cs, top + f * Math.max(0, bottom - top - sh), sw, sh, cs);
+        });
+      }
+      var tw = Math.min(MAXW, W / 2 - 12 - pad), th = heightAt(tw);
+      TB_X.forEach(function (f, i) {
+        var x = L ? pad + f * (W / 2 - 12 - pad - tw) : W / 2 + 12 + (1 - f) * (W / 2 - 12 - pad - tw);
+        add("T" + i, x, Math.max(top, blk.t - CLEAR - th - 24), tw, th, CLEAR);
+        add("B" + i, x, blk.b + CLEAR + 24, tw, th, CLEAR);
+      });
+      return out;
+    }
     function place() {
-      var s;
-      do { s = Math.floor(Math.random() * SLOTS.length); } while (s === lastSlot);
-      lastSlot = s;
-      var free = Math.max(0, box.clientHeight - el.offsetHeight);
-      el.style.top = Math.round(SLOTS[s][0] * free) + "px";
-      el.style[side === "left" ? "left" : "right"] = SLOTS[s][1] + "px";
+      var c = candidates(), pool = c.filter(function (s) { return s.id !== lastSlot; });
+      if (!pool.length) pool = c;
+      if (!pool.length) { el.style.visibility = "hidden"; return; }   // nowhere clear
+      var s = pool[Math.floor(Math.random() * pool.length)];
+      lastSlot = s.id;
+      el.style.visibility = "";
+      el.style.width = s.w + "px";
+      el.style.left = Math.round(s.x) + "px";
+      el.style.top = Math.round(s.y) + "px";
+      el.setAttribute("data-slot", s.id);
+      el.setAttribute("data-clear", Math.round(s.clear));
     }
     function show(firstHold) {
       fill(el, next());
@@ -155,7 +212,8 @@
       }, FADE + HOLD + (firstHold || 0));
     }
     return { start: function (delay, firstHold) { later(function () { show(firstHold); }, delay); },
-             still: function () { fill(el, items[0]); lastSlot = -1; place(); el.classList.add("is-on"); },
+             still: function () { fill(el, items[0]); lastSlot = ""; place(); el.classList.add("is-on"); },
+             replace: function () { if (el.classList.contains("is-on")) { lastSlot = ""; place(); } },
              hide: function () { el.classList.remove("is-on"); } };
   }
 
@@ -202,6 +260,11 @@
 
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) { stopAll(); } else { run(); }
+  });
+  var rz;
+  window.addEventListener("resize", function () {
+    clearTimeout(rz);
+    rz = setTimeout(function () { if (sideMQ.matches) { left.replace(); right.replace(); } }, 200);
   });
   if (sideMQ.addEventListener) sideMQ.addEventListener("change", run);
   else if (sideMQ.addListener) sideMQ.addListener(run);

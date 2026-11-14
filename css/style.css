@@ -1142,30 +1142,20 @@ body.lightbox-open {
 }
 
 @media (min-width: 1240px) and (min-height: 600px) {
+  /* each layer covers the hero; js/hero-quotes.js places every block in a
+     spot that keeps its clearance from the title block, menu and lantern */
   .hq-side {
     display: block;
     position: absolute;
-    top: 118px;
-    bottom: 150px;
-    /* the free space beside the title (title, eyebrow and tagline stay
-       inside the central ~730px); blocks hug that band from the outside */
-    width: min(250px, calc(50% - 377px - var(--page-pad) - 20px));
+    inset: 0;
     z-index: 1;
     pointer-events: none;
     text-align: left;
   }
 
-  .hq-left {
-    right: calc(50% + 377px);
-  }
-
-  .hq-right {
-    left: calc(50% + 377px);
-  }
-
   .hq-side .hq-item {
     position: absolute;
-    width: calc(100% - 24px);
+    width: 300px;
   }
 }
 
