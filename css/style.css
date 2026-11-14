@@ -1,6 +1,27 @@
 /* Lantern & Leaves — mystical twilight forest theme
    Deep moss, night blue, amber lantern light, parchment text. */
 
+/* Local sans sized to Poppins' widths and line metrics, so the menu wraps the
+   same way before and after the web font loads. */
+@font-face {
+  font-family: "Poppins Fallback";
+  src: local("Arial"), local("Helvetica"), local("Liberation Sans"), local("Arimo");
+  size-adjust: 111.65%;
+  ascent-override: 94.04%;
+  descent-override: 31.35%;
+  line-gap-override: 8.96%;
+}
+
+/* Local serif with Playfair Display's line metrics, used only until the web
+   font arrives, so the hero text keeps the same height and nothing shifts. */
+@font-face {
+  font-family: "Playfair Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("Liberation Serif"), local("DejaVu Serif");
+  ascent-override: 108.2%;
+  descent-override: 25.1%;
+  line-gap-override: 0%;
+}
+
 :root {
   --moss: #0f1a14;
   --moss-2: #13201a;
@@ -15,10 +36,10 @@
   --focus: #d9a441;
   --gutter: 1.1rem;
   --page-pad: clamp(1.25rem, 3.5vw, 3.25rem);
-  --font: "Poppins", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font: "Poppins", "Poppins Fallback", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   --serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --display: "Playfair Display", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-  --accent-font: "Playfair Display", Georgia, serif; /* italic */
+  --display: "Playfair Display", "Playfair Fallback", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --accent-font: "Playfair Display", "Playfair Fallback", Georgia, serif; /* italic */
 }
 
 *,
