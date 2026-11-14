@@ -97,10 +97,10 @@
   var sideMQ = window.matchMedia("(min-width: 1240px) and (min-height: 600px)");
 
   // Placement (desktop): verses lean left, quotes lean right. Spots above and
-  // below the title block are used only when they keep the full CLEAR (~2in);
+  // below the title block are used only when they keep the full CLEAR (~1.5in);
   // side spots hug the block at CLEAR, or at the most clearance the window
-  // allows while keeping a readable block width (MINW).
-  var CLEAR = 192, MINW = 180, MAXW = 300, EDGE = 24;
+  // allows while keeping the side block SIDEW wide.
+  var CLEAR = 150, MINW = 180, SIDEW = 215, MAXW = 300, EDGE = 24;
   var SIDE_Y = [0.06, 0.3, 0.5, 0.7, 0.94], TB_X = [0.12, 0.6];
 
   function bag(items) {             // shuffle bag: no repeats until all shown
@@ -166,7 +166,7 @@
       var head = rel(".site-header"), cue = rel(".scroll-cue");
       var top = (head ? Math.max(0, head.b) : 0) + EDGE, bottom = H - EDGE;
       var room = L ? blk.l - pad : W - pad - blk.r;            // beside the block
-      var cs = Math.max(EDGE, Math.min(CLEAR, room - MINW));   // side clearance
+      var cs = Math.max(EDGE, Math.min(CLEAR, room - SIDEW));   // side clearance
       var sw = Math.min(MAXW, room - cs), out = [];
       function add(id, x, y, w, h, clear) {
         var c = { l: x, t: y, r: x + w, b: y + h };
