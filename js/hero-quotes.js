@@ -261,10 +261,13 @@
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) { stopAll(); } else { run(); }
   });
+  function replaceSides() { if (sideMQ.matches) { left.replace(); right.replace(); } }
+  // the title's real width is known only once its web font has loaded
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(replaceSides);
   var rz;
   window.addEventListener("resize", function () {
     clearTimeout(rz);
-    rz = setTimeout(function () { if (sideMQ.matches) { left.replace(); right.replace(); } }, 200);
+    rz = setTimeout(replaceSides, 200);
   });
   if (sideMQ.addEventListener) sideMQ.addEventListener("change", run);
   else if (sideMQ.addListener) sideMQ.addListener(run);
