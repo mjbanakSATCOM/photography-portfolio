@@ -99,8 +99,9 @@
   // Placement (desktop): verses lean left, quotes lean right. Spots above and
   // below the title block are used only when they keep the full CLEAR (~1.5in);
   // side spots hug the block at CLEAR, or at the most clearance the window
-  // allows while keeping the side block SIDEW wide.
-  var CLEAR = 150, MINW = 180, SIDEW = 215, MAXW = 300, EDGE = 24;
+  // allows while keeping the side block SIDEW wide. Every block also keeps
+  // EDGE + MARGIN from the window edges and the menu.
+  var CLEAR = 150, MINW = 160, SIDEW = 190, MAXW = 300, EDGE = 24, MARGIN = 48;
   var SIDE_Y = [0.06, 0.3, 0.5, 0.7, 0.94], TB_X = [0.12, 0.6];
 
   function bag(items) {             // shuffle bag: no repeats until all shown
@@ -157,14 +158,14 @@
     function candidates() {
       var W = hero.clientWidth, H = hero.clientHeight;
       var hc = hero.querySelector(".hero-content");
-      var pad = (hc && parseFloat(getComputedStyle(hc).paddingLeft)) || 40;
+      var pad = ((hc && parseFloat(getComputedStyle(hc).paddingLeft)) || 40) + MARGIN;
       var parts = [rel(".hero-badge-img"), rel(".hero-eyebrow", true), rel(".hero-name", true), rel(".hero-tagline", true)].filter(Boolean);
       var blk = { l: Math.min.apply(0, parts.map(function (p) { return p.l; })),
                   t: Math.min.apply(0, parts.map(function (p) { return p.t; })),
                   r: Math.max.apply(0, parts.map(function (p) { return p.r; })),
                   b: Math.max.apply(0, parts.map(function (p) { return p.b; })) };
       var head = rel(".site-header"), cue = rel(".scroll-cue");
-      var top = (head ? Math.max(0, head.b) : 0) + EDGE, bottom = H - EDGE;
+      var top = (head ? Math.max(0, head.b) : 0) + EDGE + MARGIN, bottom = H - EDGE - MARGIN;
       var room = L ? blk.l - pad : W - pad - blk.r;            // beside the block
       var cs = Math.max(EDGE, Math.min(CLEAR, room - SIDEW));   // side clearance
       var sw = Math.min(MAXW, room - cs), out = [];
