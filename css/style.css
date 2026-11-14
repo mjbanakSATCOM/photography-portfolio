@@ -231,6 +231,30 @@ button:focus-visible {
   opacity: 0.9;
 }
 
+.hero-badge {
+  display: block;
+  margin: 0 auto 1.1rem;
+  width: clamp(120px, 18vw, 200px);
+}
+
+.hero-badge-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 24px rgba(217, 164, 65, 0.35));
+  animation: badge-breathe 7s ease-in-out infinite alternate;
+}
+
+@keyframes badge-breathe {
+  from { opacity: 0.6; }
+  to { opacity: 0.72; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-img { animation: none; }
+}
+
 .hero-title {
   margin: 0;
   font-family: var(--display);

@@ -158,7 +158,7 @@
       var W = hero.clientWidth, H = hero.clientHeight;
       var hc = hero.querySelector(".hero-content");
       var pad = (hc && parseFloat(getComputedStyle(hc).paddingLeft)) || 40;
-      var parts = [rel(".hero-eyebrow", true), rel(".hero-name", true), rel(".hero-tagline", true)].filter(Boolean);
+      var parts = [rel(".hero-badge-img"), rel(".hero-eyebrow", true), rel(".hero-name", true), rel(".hero-tagline", true)].filter(Boolean);
       var blk = { l: Math.min.apply(0, parts.map(function (p) { return p.l; })),
                   t: Math.min.apply(0, parts.map(function (p) { return p.t; })),
                   r: Math.max.apply(0, parts.map(function (p) { return p.r; })),
