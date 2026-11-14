@@ -1148,19 +1148,19 @@ body.lightbox-open {
     top: 118px;
     bottom: 150px;
     /* the free space beside the title (title, eyebrow and tagline stay
-       inside the central ~730px) */
-    width: min(300px, calc((100vw - 730px) / 2 - var(--page-pad) - 28px));
+       inside the central ~730px); blocks hug that band from the outside */
+    width: min(250px, calc(50% - 377px - var(--page-pad) - 20px));
     z-index: 1;
     pointer-events: none;
     text-align: left;
   }
 
   .hq-left {
-    left: var(--page-pad);
+    right: calc(50% + 377px);
   }
 
   .hq-right {
-    right: var(--page-pad);
+    left: calc(50% + 377px);
   }
 
   .hq-side .hq-item {

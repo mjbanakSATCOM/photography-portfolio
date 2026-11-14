@@ -97,7 +97,7 @@
   var sideMQ = window.matchMedia("(min-width: 1240px) and (min-height: 600px)");
 
   // slot = fraction of the free vertical band + small horizontal offset (px)
-  var SLOTS = [[0.04, 0], [0.5, 16], [0.96, 6], [0.27, 22], [0.73, 10]];
+  var SLOTS = [[0.11, 0], [0.5, 16], [0.96, 6], [0.27, 22], [0.73, 10]];
 
   function bag(items) {             // shuffle bag: no repeats until all shown
     var order = [], last = -1;
