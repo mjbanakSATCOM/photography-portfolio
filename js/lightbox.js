@@ -45,7 +45,9 @@
       webp: link.getAttribute("data-full-webp") || "",
       width: link.getAttribute("data-width") || "",
       height: link.getAttribute("data-height") || "",
-      alt: link.getAttribute("data-alt") || (link.querySelector("img") || {}).alt || "",
+      // alt describes the photo (thumbnail alt); the caption is the photo's title (data-alt)
+      alt: (link.querySelector("img") || {}).alt || link.getAttribute("data-alt") || "",
+      caption: link.getAttribute("data-alt") || (link.querySelector("img") || {}).alt || "",
     };
   }
 
@@ -65,7 +67,7 @@
       img.src = data.jpg;
       if (img.complete && img.naturalWidth) loaded();
     }
-    caption.textContent = data.alt + "  ·  " + (index + 1) + " of " + links.length;
+    caption.textContent = data.caption + "  ·  " + (index + 1) + " of " + links.length;
     btnPrev.disabled = links.length < 2;
     btnNext.disabled = links.length < 2;
   }

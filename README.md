@@ -14,10 +14,10 @@ Processed images live under `images/<album-slug>/`. Originals are kept out of th
 
 ## Adding photographs
 
-1. Export a web JPEG (long edge about 2400px, quality about 82, sRGB) and a thumbnail (long edge about 800px). Optional WebP versions are used when present.
+1. Export a web JPEG (long edge about 2400px, quality about 82, sRGB), a thumbnail 600px wide (JPEG and WebP), and a 900px-wide WebP thumbnail (`-thumb-900.webp`) for high-density screens.
 2. Strip location and other EXIF metadata (keep the file free of `GPS*` tags).
 3. Save files as `images/<album-slug>/img-XXXX.jpg`, `img-XXXX-thumb.jpg`, and matching `.webp` files if you have them.
-4. Add a `.photo-link` block to the album page, using the other album pages as a template. Set `width` and `height` to the real pixel sizes and write alt text as “Album name, photo N”.
+4. Add a `.photo-link` block to the album page, using the other album pages as a template. Set `width` and `height` to the real pixel sizes. The visible caption (`data-alt`) is the photo title from the file name, or “Album name, photo N”; the thumbnail’s `alt` is a short factual description of the photo (never a place name).
 5. Update the photograph count on the album page and the matching card on `index.html`.
 
 ## Contact and about
