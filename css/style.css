@@ -940,11 +940,6 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
   transition: opacity 1.2s ease, visibility 0s;
 }
 
-/* Black & White has no photo count, so the quote ends the header */
-.page-header .album-quote:last-child {
-  margin-bottom: 0;
-}
-
 .album-quote blockquote {
   margin: 0;
 }
@@ -968,12 +963,9 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
   color: var(--amber);
 }
 
-.page-header .photo-count {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+/* the intro (or quote) ends each album header */
+.page-header .album-intro:last-child {
+  margin-bottom: 0;
 }
 
 .prose {
