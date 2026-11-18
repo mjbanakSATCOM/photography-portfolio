@@ -26,7 +26,7 @@
         }
       });
     }, { rootMargin: "-25% 0px -25% 0px" });
-    Array.prototype.forEach.call(document.querySelectorAll(".masonry > a"), function (a) { litIO.observe(a); });
+    Array.prototype.forEach.call(document.querySelectorAll(".masonry > a, .portal"), function (a) { litIO.observe(a); });
   }
 
   /* ---- Header state on the home page ---- */
@@ -51,7 +51,7 @@
   var revealEls = [];
   if (doc.classList.contains("fx")) {
     // Titles and text fade in; the photo grids never do.
-    var groups = document.querySelectorAll(".album-copy, .page-header, .prose");
+    var groups = document.querySelectorAll(".album-copy, .page-header, .prose, .portal-text");
     Array.prototype.forEach.call(groups, function (g) {
       g.classList.add("reveal");
       revealEls.push(g);
@@ -128,7 +128,7 @@
   var leafColors = ["#b9862f", "#a5582a", "#c79a3e", "#7f8f4e"];
   var sections = document.querySelectorAll(".album-section");
   Array.prototype.forEach.call(sections, function (sec, si) {
-    if (si === 0) return;
+    if (si === 0 && sections.length > 1) return;   // a lone section (the home portals) still gets leaves
     var layer = document.createElement("div");
     layer.className = "leaf-layer";
     layer.setAttribute("aria-hidden", "true");

@@ -18,7 +18,7 @@ Processed images live under `images/<album-slug>/`. Originals are kept out of th
 2. Strip location and other EXIF metadata (keep the file free of `GPS*` tags).
 3. Save files as `images/<album-slug>/img-XXXX.jpg`, `img-XXXX-thumb.jpg`, and matching `.webp` files if you have them.
 4. Add a `.photo-link` block to the album page, using the other album pages as a template. Set `width` and `height` to the real pixel sizes. The visible caption (`data-alt`) is the photo title from the file name, or “Album name, photo N”; the thumbnail’s `alt` is a short factual description of the photo (never a place name).
-5. Update the photograph count on the album page and the matching card on `index.html`.
+5. Update the photograph count on the album page. The home page gallery portals (one random photo per album, albums taken from the nav) are rebuilt by `build-portals.py` in the pipeline folder; nothing per photo is needed on `index.html`.
 
 ## Contact and about
 

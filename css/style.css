@@ -640,6 +640,155 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
   cursor: zoom-in;
 }
 
+/* Home: gallery portals, one card per album with a random photo.
+   Every window is the same square; the photo (its baked-in matte cropped
+   away) covers it, and a CSS white matte frames it. Dimming and the warm
+   glow follow the masonry grid: a paint-only veil fade and a box-shadow, no
+   filters, transforms or opacity changes on the photos, so nothing blinks. */
+
+.portals-anchor {
+  position: absolute;
+  top: 0;
+}
+
+.portal-grid {
+  --pgap: clamp(1.5rem, 3vw, 2.75rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: calc(var(--pgap) * 1.1) var(--pgap);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.portal {
+  flex: 0 0 calc((100% - 2 * var(--pgap)) / 3);
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: inherit;
+  text-decoration: none;
+}
+
+.portal-frame {
+  position: relative;
+  display: block;
+  padding: 5%;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.5s ease;
+}
+
+.portal-frame::after {
+  /* the dim veil, same as the gallery thumbnails */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-color: rgba(5, 8, 6, 0.3);
+  transition: background-color 0.6s ease;
+}
+
+.portal-window {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #050806;
+}
+
+.portal-window picture {
+  display: block;
+}
+
+.portal-img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.portal:hover .portal-frame::after,
+.portal:focus-visible .portal-frame::after,
+.portal.is-lit .portal-frame::after {
+  background-color: rgba(5, 8, 6, 0);
+}
+
+.portal:hover .portal-frame,
+.portal:focus-visible .portal-frame,
+.portal.is-lit .portal-frame {
+  box-shadow: 0 0 0 1px rgba(217, 164, 65, 0.35), 0 0 26px rgba(217, 164, 65, 0.22), 0 14px 40px rgba(0, 0, 0, 0.45);
+}
+
+.portal:focus-visible {
+  outline: none;
+}
+
+.portal:focus-visible .portal-name {
+  text-decoration: underline;
+  text-decoration-color: var(--amber);
+  text-underline-offset: 0.3em;
+}
+
+.portal-text {
+  display: block;
+  padding-top: 1.1rem;
+  text-align: center;
+}
+
+.portal-name {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 1.9vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.portal-cta {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--accent-font);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--soft);
+  transition: color 0.4s ease;
+}
+
+.portal:hover .portal-cta,
+.portal:focus-visible .portal-cta {
+  color: var(--amber);
+}
+
+.cta-tap {
+  display: none;
+}
+
+@media (hover: none) {
+  .cta-click {
+    display: none;
+  }
+
+  .cta-tap {
+    display: inline;
+  }
+}
+
+@media (max-width: 960px) {
+  .portal {
+    flex-basis: calc((100% - var(--pgap)) / 2);
+  }
+}
+
+@media (max-width: 560px) {
+  .portal {
+    flex-basis: 100%;
+    max-width: 26rem;
+  }
+}
+
 /* Scroll reveal (only when effects are enabled) */
 
 .fx .reveal {
