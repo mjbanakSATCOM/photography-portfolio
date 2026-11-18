@@ -766,35 +766,6 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
   color: var(--text);
 }
 
-.portal-cta {
-  display: block;
-  margin-top: 0.4rem;
-  font-family: var(--accent-font);
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--soft);
-  transition: color 0.4s ease;
-}
-
-.portal:hover .portal-cta,
-.portal:focus-visible .portal-cta {
-  color: var(--amber);
-}
-
-.cta-tap {
-  display: none;
-}
-
-@media (hover: none) {
-  .cta-click {
-    display: none;
-  }
-
-  .cta-tap {
-    display: inline;
-  }
-}
-
 @media (max-width: 960px) {
   .portal {
     flex-basis: calc((100% - var(--pgap)) / 2);
