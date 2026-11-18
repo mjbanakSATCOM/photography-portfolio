@@ -919,6 +919,27 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
   margin: 0 auto 1.3rem;
 }
 
+.album-quote {
+  display: grid;
+}
+
+/* rotating quotes share one grid cell, so the block always keeps the height
+   of the tallest one (js/album-quotes.js) */
+.aq-item {
+  grid-area: 1 / 1;
+  align-self: center;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease, visibility 0s linear 1.2s;
+}
+
+.aq-item.is-on {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, visibility 0s;
+}
+
 .album-quote blockquote {
   margin: 0;
 }
