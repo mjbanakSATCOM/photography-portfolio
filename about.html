@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script>(function(d){if(!window.matchMedia||!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("fx");setTimeout(function(){if(!window.__forest)d.classList.remove("fx")},3000)}})(document.documentElement)</script>
 </head>
-<body>
+<body class="about-page">
   <header class="site-header">
     <a class="site-title brand-lockup" href="index.html"><span class="brand-name">Lantern <span class="amp">&amp;</span> Leaves<span class="brand-sub">Photography</span></span></a>
     <nav class="site-nav" aria-label="Primary">
@@ -44,10 +44,34 @@
     </nav>
   </header>
 
+  <div class="about-bg" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 700px)" type="image/webp" srcset="images/backgrounds/about-forest-lantern-portrait.webp">
+      <source media="(max-width: 700px)" srcset="images/backgrounds/about-forest-lantern-portrait.jpg">
+      <source type="image/webp" srcset="images/backgrounds/about-forest-lantern.webp">
+      <img src="images/backgrounds/about-forest-lantern.jpg" alt="" width="2400" height="1350" decoding="async">
+    </picture>
+    <div class="about-veil"></div>
+    <canvas class="motes"></canvas>
+  </div>
+
   <main class="page-main">
-    <article class="prose">
-      <h1>About</h1>
-      <p>This is a photography portfolio. The work is grouped into five albums: City &amp; Architecture, Landscapes, Nature, Portraits, and Black &amp; White.</p>
+    <article class="prose about-panel">
+      <h1>Welcome to Lantern &amp; Leaves</h1>
+      <p><span class="todo-slot">[Version 1 text — paste verbatim]</span></p>
+
+      <h2>A little about me</h2>
+      <p><span class="todo-slot">[Version 1 text — paste verbatim]</span></p>
+
+      <h2>The photographs</h2>
+      <p><span class="todo-slot">[Version 1 text — paste verbatim]</span></p>
+
+      <blockquote class="about-quote">
+        <p><span class="todo-slot">[Version 1 text — paste verbatim]</span></p>
+        <cite>&mdash; C.&thinsp;S. Lewis</cite>
+      </blockquote>
+
+      <p class="about-signoff">God bless,<br><span>Mike</span></p>
     </article>
   </main>
 
