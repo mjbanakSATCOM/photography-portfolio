@@ -1567,3 +1567,345 @@ body.lightbox-open {
 
 /* Light photo protection (pairs with forest.js) */
 img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+
+/* Contact form: an old photograph you write a note inside, with a
+   camera-shutter Send button. */
+
+.contact-page {
+  --ink: #2a1c12;
+  --ink-soft: #4a3728;
+  --paper: #e6d2b4;
+  --paper-deep: #dcc4a0;
+  --mat: #fffcf6;
+}
+
+.contact-stage {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0.6rem 0.4rem 1.5rem;
+}
+
+.contact-print {
+  position: relative;
+  padding: 2.15rem 2rem 2.25rem;
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.48)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+@media (min-width: 700px) {
+  .contact-print {
+    transform: rotate(-1.15deg);
+    padding: 2.35rem 2.2rem 2.5rem;
+  }
+}
+
+.contact-print-mat {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--mat);
+  -webkit-mask-image: url("../images/backgrounds/contact-print-deckle.png");
+  mask-image: url("../images/backgrounds/contact-print-deckle.png");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+}
+
+.contact-print-body {
+  position: relative;
+  z-index: 1;
+  padding: 1.35rem 1.2rem 1.5rem;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, transparent 50%, rgba(70, 40, 16, 0.16) 100%),
+    linear-gradient(180deg, rgba(255, 248, 230, 0.28), rgba(90, 50, 20, 0.08)),
+    var(--paper);
+  background-color: var(--paper);
+  color: var(--ink);
+  box-shadow: inset 0 0 40px rgba(80, 45, 15, 0.12), 0 0 0 1px rgba(70, 48, 24, 0.16);
+}
+
+.contact-print-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("../images/backgrounds/contact-paper-grain.png") center / 180px 180px repeat;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+}
+
+.contact-print-body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.photo-corner {
+  position: absolute;
+  z-index: 2;
+  width: 1.35rem;
+  height: 1.35rem;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--diag, 135deg), transparent 48%, #3d2a1a 48%, #3d2a1a 54%, #c9b089 54%, #a89068 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.photo-corner-tl { top: 1.35rem; left: 1.35rem; --diag: 135deg; }
+.photo-corner-tr { top: 1.35rem; right: 1.35rem; --diag: -135deg; }
+.photo-corner-bl { bottom: 1.35rem; left: 1.35rem; --diag: 45deg; }
+.photo-corner-br { bottom: 1.35rem; right: 1.35rem; --diag: -45deg; }
+
+.contact-print-body h1 {
+  margin: 0 0 0.45rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  color: var(--ink);
+  text-align: center;
+}
+
+.contact-lede {
+  margin: 0 0 1.4rem;
+  font-family: "Caveat", "Playfair Display", Georgia, cursive;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.contact-form {
+  margin: 0;
+}
+
+.contact-field {
+  margin: 0 0 1.05rem;
+}
+
+.contact-field label {
+  display: block;
+  margin: 0 0 0.15rem;
+  font-family: "Caveat", "Playfair Display", Georgia, cursive;
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.contact-field input,
+.contact-field textarea {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.35rem 0.15rem 0.4rem;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(58, 36, 20, 0.45);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.5;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.contact-field textarea {
+  min-height: 12rem;
+  resize: vertical;
+  border-bottom: none;
+  padding: 0.45rem 0.4rem 0.5rem;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 1.55rem,
+    rgba(58, 36, 20, 0.22) 1.55rem,
+    rgba(58, 36, 20, 0.22) calc(1.55rem + 1px)
+  );
+  background-origin: content-box;
+  background-attachment: local;
+  line-height: 1.55rem;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: rgba(42, 28, 18, 0.4);
+}
+
+.contact-field input:hover,
+.contact-field textarea:hover {
+  border-bottom-color: rgba(58, 36, 20, 0.7);
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-bottom-color: var(--amber);
+}
+
+.contact-send {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0 0.2rem;
+}
+
+.shutter-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0.2rem;
+  border: none;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.shutter-iris {
+  display: block;
+  width: 5.4rem;
+  height: 5.4rem;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+  transition: transform 0.35s ease;
+}
+
+.shutter-iris svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.shutter-blades path {
+  fill: #3a3428;
+  stroke: #1a1610;
+  stroke-width: 0.6;
+  transform-box: fill-box;
+  transform-origin: 50px 50px;
+}
+
+.shutter-blades {
+  transform-origin: 50px 50px;
+  transform-box: view-box;
+  transition: transform 0.35s ease;
+}
+
+.aperture-hole,
+.aperture-ring {
+  transform-origin: 50px 50px;
+  transform-box: fill-box;
+  transition: transform 0.35s ease;
+}
+
+.shutter-close {
+  transform: scale(0);
+  transform-origin: 50px 50px;
+  transform-box: fill-box;
+  transition: transform 0.18s ease-in;
+}
+
+.shutter-text {
+  font-family: "Caveat", "Playfair Display", Georgia, cursive;
+  font-weight: 600;
+  font-size: 1.55rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.shutter-submit:hover .shutter-iris,
+.shutter-submit:focus-visible .shutter-iris {
+  transform: scale(1.04);
+}
+
+.shutter-submit:hover .shutter-blades,
+.shutter-submit:focus-visible .shutter-blades {
+  transform: rotate(20deg);
+}
+
+.shutter-submit:hover .aperture-hole,
+.shutter-submit:hover .aperture-ring,
+.shutter-submit:focus-visible .aperture-hole,
+.shutter-submit:focus-visible .aperture-ring {
+  transform: scale(0.68);
+}
+
+.shutter-submit:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+.shutter-submit.is-shutting .shutter-blades {
+  transform: rotate(42deg);
+}
+
+.shutter-submit.is-shutting .aperture-hole,
+.shutter-submit.is-shutting .aperture-ring {
+  transform: scale(0);
+}
+
+.shutter-submit.is-shutting .shutter-close {
+  transform: scale(1);
+  transition-delay: 0.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-print {
+    transform: none;
+  }
+
+  .shutter-iris,
+  .shutter-blades,
+  .aperture-hole,
+  .aperture-ring,
+  .shutter-close {
+    transition: none;
+  }
+}
+
+.thanks-home {
+  margin: 1.4rem 0 0.2rem;
+  text-align: center;
+}
+
+.thanks-home a {
+  color: #6b4a1e;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  text-underline-offset: 0.2em;
+}
+
+.thanks-home a:hover {
+  color: #8a5f18;
+}
+
+.contact-print-thanks .contact-print-body {
+  padding-top: 2.2rem;
+  padding-bottom: 2.2rem;
+}
+
+@media (max-width: 480px) {
+  .contact-stage {
+    padding: 0;
+  }
+
+  .contact-print {
+    padding: 1.65rem 1.45rem 1.75rem;
+  }
+
+  .contact-print-body {
+    padding: 1.15rem 0.95rem 1.25rem;
+  }
+
+  .photo-corner {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+}
