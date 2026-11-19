@@ -1468,16 +1468,12 @@ body.lightbox-open {
   object-position: 30% 60%;
 }
 
-.about-bg img {
-  filter: saturate(0.95) brightness(0.85);
-}
 
 .about-veil {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 75% 65% at 50% 45%, transparent 40%, rgba(4, 8, 6, 0.65) 100%),
-    linear-gradient(180deg, rgba(9, 15, 12, 0.45) 0%, rgba(9, 15, 12, 0.12) 40%, rgba(9, 15, 12, 0.5) 100%);
+    linear-gradient(180deg, rgba(9, 15, 12, 0.28) 0%, transparent 16%, transparent 84%, rgba(9, 15, 12, 0.35) 100%);
 }
 
 .about-bg .motes {
@@ -1500,9 +1496,10 @@ body.lightbox-open {
 }
 
 .about-panel {
-  max-width: 40rem;
+  max-width: 62.5rem; /* ~1000px; about 70% of a 1440px desktop */
+  width: 100%;
   margin: 0 auto;
-  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.4rem, 4vw, 3.25rem);
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 5vw, 4.25rem);
   background: rgba(8, 13, 11, 0.8);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
