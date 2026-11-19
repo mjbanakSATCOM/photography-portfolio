@@ -1567,9 +1567,3 @@ body.lightbox-open {
   font-size: 1.45rem;
   color: var(--amber);
 }
-
-.todo-slot {
-  color: var(--amber);
-  border: 1px dashed rgba(217, 164, 65, 0.6);
-  padding: 0 0.3em;
-}
