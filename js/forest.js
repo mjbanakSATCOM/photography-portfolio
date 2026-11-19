@@ -228,3 +228,11 @@
   }).observe(canvas);
   setRunning();
 })();
+
+/* Light photo protection: no right-click menu, drag-to-desktop, or
+   long-press save on images. Links and the rest of the page work as usual. */
+(function () {
+  function isImg(t) { return t && t.tagName === "IMG"; }
+  document.addEventListener("contextmenu", function (e) { if (isImg(e.target)) e.preventDefault(); });
+  document.addEventListener("dragstart", function (e) { if (isImg(e.target)) e.preventDefault(); });
+})();
