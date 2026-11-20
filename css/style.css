@@ -1508,7 +1508,7 @@ body.lightbox-open {
 
 .about-page .page-main {
   background: none;
-  padding-top: clamp(2.5rem, 8vh, 5.5rem);
+  padding-top: 1.25rem;
   padding-bottom: clamp(3rem, 12vh, 7rem);
 }
 
@@ -1584,7 +1584,7 @@ body.lightbox-open {
 
 /* About: the brand film, click to play (preload none) */
 .about-film {
-  margin: 2.4rem 0 0.6rem;
+  margin: 0 0 2.25rem;
 }
 
 /* video first, then the title and caption centred beneath it like a title card */
