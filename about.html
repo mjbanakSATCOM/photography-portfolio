@@ -70,6 +70,19 @@
       <p>Fairy tales don't pull us away from the real world. They add a layer of wonder to it. I couldn't agree more, and I think Tolkien, who loved trees as much as anyone, would agree too.</p>
       <p>That's why, after reading <em>The Hobbit</em> or <em>The Lord of the Rings</em>, every walk in the forest or the woods becomes a stroll through Fangorn, Lothlórien, or even Mirkwood. You can almost picture Elves and other creatures hidden among the trees, watching. Our imaginations are hungry, and we can feed them good, nourishing food, or rubbish that starves and distorts them. In its own small way, photography tells those stories.</p>
       <p>That's why, on the home page, you'll see verses from the Bible about God's light rotating alongside quotes that shine a light on nature and photography.</p>
+      <h2>The film</h2>
+      <figure class="about-film">
+        <div class="about-film-frame">
+          <video controls preload="none" playsinline controlslist="nodownload" poster="assets/film/full-poster.jpg" width="1280" height="720" aria-label="Lantern &amp; Leaves brand film, 42 seconds, with music">
+            <source media="(max-width: 900px)" src="assets/film/full-720.webm" type="video/webm">
+            <source media="(max-width: 900px)" src="assets/film/full-720.mp4" type="video/mp4">
+            <source src="assets/film/full-1080.webm" type="video/webm">
+            <source src="assets/film/full-1080.mp4" type="video/mp4">
+          </video>
+          <button class="about-film-play" type="button" aria-label="Play the film" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button>
+        </div>
+        <figcaption>Wanderings in light and leaf &middot; 0:42, sound on</figcaption>
+      </figure>
       <h2>A little about me</h2>
       <p>I'm Mike, and I've loved photography for most of my life. As a kid I dabbled without much of a clue, a small spark that hadn't caught yet. That changed when my family and I moved to England. The history, the natural beauty, and long walks through the countryside inspired me to try to capture what I saw.</p>
       <p>Along the way, an older local man who had been photographing for more than 40 years took me under his wing. He taught me more than any classroom could have. He worked mainly in black and white, and I fell in love with it right away. It's still at the heart of what I do. Over time I came to see how wonderful color can be too, because that's how God paints things.</p>
@@ -85,6 +98,15 @@
     <picture class="footer-mark-pic"><source type="image/webp" srcset="assets/brand/g4/mark-256.webp"><img class="footer-mark" src="assets/brand/g4/mark-256.png" alt="" width="176" height="256" loading="lazy"></picture>
     <p>Lantern &amp; Leaves Photography</p>
   </footer>
+  <script>
+  (function () {
+    var f = document.querySelector(".about-film"); if (!f) return;
+    var v = f.querySelector("video"), b = f.querySelector(".about-film-play");
+    b.hidden = false;
+    b.addEventListener("click", function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); });
+    v.addEventListener("play", function () { f.classList.add("is-playing"); });
+  })();
+  </script>
   <script src="js/forest.js" defer></script>
 </body>
 </html>

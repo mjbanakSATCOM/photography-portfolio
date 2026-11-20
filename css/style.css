@@ -1582,6 +1582,84 @@ body.lightbox-open {
   color: var(--amber);
 }
 
+/* About: the brand film, click to play (preload none) */
+.about-film {
+  margin: 1.4rem 0 0.4rem;
+}
+
+.about-film-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(217, 164, 65, 0.35);
+  background: #0d1420;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 44px rgba(217, 164, 65, 0.08);
+}
+
+.about-film video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #0d1420;
+}
+
+.about-film-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 164, 65, 0.8);
+  background: rgba(9, 15, 12, 0.55);
+  color: var(--amber);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 0 26px rgba(217, 164, 65, 0.22);
+  transition: opacity 0.4s ease, background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.about-film-play[hidden] { display: none; }
+
+.about-film-play:hover,
+.about-film-play:focus-visible {
+  background: rgba(217, 164, 65, 0.16);
+  box-shadow: 0 0 36px rgba(217, 164, 65, 0.4);
+  transform: scale(1.05);
+  outline: none;
+}
+
+.about-film-play svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+  fill: currentColor;
+}
+
+.about-film.is-playing .about-film-play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.about-film figcaption {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-family: var(--accent-font);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--soft);
+}
+
+@media (max-width: 600px) {
+  .about-film-play { width: 62px; height: 62px; }
+  .about-film-play svg { width: 22px; height: 22px; }
+}
+
 /* Light photo protection (pairs with forest.js) */
 img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 

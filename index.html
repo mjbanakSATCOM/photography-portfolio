@@ -28,9 +28,180 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://lanternandleavesphotography.com/assets/brand/g4/og-image-1200x630.png?v=2">
   <link rel="stylesheet" href="css/style.css">
+  <style id="ll-intro-css">
+    /* First-visit brand film (index only). Inserted by the inline script at the top of <body>;
+       without JS none of these classes exist and the page is untouched. */
+    html { scrollbar-gutter: stable; } /* same gutter with or without the intro: no shift when scroll unlocks */
+    html.intro-on { overflow: hidden; background: #0d1420; }
+    html.intro-on body { overflow: hidden; }
+    html.intro-on .hero-content, html.intro-on .motes, html.intro-on .hq-side { opacity: 0; }
+    html.intro-reveal .hero-content { animation: ll-intro-rise 1.4s 0.4s cubic-bezier(.2,.6,.2,1) both; }
+    html.intro-reveal .motes { animation: ll-intro-fade 2.4s 0.8s ease-out both; }
+    @keyframes ll-intro-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    @keyframes ll-intro-fade { from { opacity: 0; } to { opacity: 1; } }
+    .ll-intro {
+      position: fixed; inset: 0; z-index: 2147483000;
+      background: #0d1420;
+      opacity: 1; transition: opacity 1.2s cubic-bezier(.45,0,.25,1);
+      overscroll-behavior: contain; touch-action: none;
+    }
+    .ll-intro.is-out { opacity: 0; pointer-events: none; }
+    /* last seconds: drift back to centre framing so the final frame lines up with the hero photo */
+    .ll-intro video { transition: object-position 2.5s ease-in-out; }
+    .ll-intro.is-settling video { object-position: 50% 50%; }
+    .ll-intro video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: transparent; }
+    /* the verse sits ~6% from the left edge: on screens narrower than 16:9 crop mostly from the right,
+       and below 3:2 (tablets, portrait phones) show the whole frame on the film's own dark colour */
+    @media (max-aspect-ratio: 16/9) { .ll-intro video { object-position: 22% 50%; } }
+    @media (max-aspect-ratio: 3/2) { .ll-intro video { object-fit: contain; object-position: 50% 50%; } }
+    .ll-intro-btn {
+      position: absolute; bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      font: 500 0.72rem/1 Poppins, system-ui, sans-serif; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #e8dfc8; background: rgba(9, 15, 12, 0.38); border: 1px solid rgba(217, 164, 65, 0.65);
+      border-radius: 999px; padding: 0.75em 1.3em; cursor: pointer;
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      opacity: 0; animation: ll-intro-fade 0.6s 0.1s ease-out forwards;
+      transition: color .25s, border-color .25s, box-shadow .25s, background-color .25s;
+    }
+    .ll-intro-btn:hover, .ll-intro-btn:focus-visible {
+      color: #d9a441; border-color: #d9a441; background: rgba(9, 15, 12, 0.6);
+      box-shadow: 0 0 18px rgba(217, 164, 65, 0.28); outline: none;
+    }
+    .ll-intro-skip { right: calc(20px + env(safe-area-inset-right, 0px)); }
+    .ll-intro-sound { left: calc(20px + env(safe-area-inset-left, 0px)); border-color: rgba(232, 223, 200, 0.28); color: #cfc6ae; }
+    .ll-intro-sound svg { width: 1.1em; height: 1.1em; vertical-align: -0.22em; margin-right: 0.55em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+    @media (max-width: 600px) { .ll-intro-btn { font-size: 0.66rem; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); } .ll-intro-skip { right: 14px; } .ll-intro-sound { left: 14px; } }
+  </style>
   <script>(function(d){if(!window.matchMedia||!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("fx");setTimeout(function(){if(!window.__forest)d.classList.remove("fx")},3000)}})(document.documentElement)</script>
 </head>
 <body class="home">
+  <script>
+  /* First-visit brand film. Shown once per visitor (localStorage "ll-intro-seen"); ?intro=1 forces a replay.
+     Skipped for reduced motion, Save-Data / 2G, crawlers and same-site navigation. Runs before anything paints. */
+  (function () {
+    var d = document, h = d.documentElement, w = window, KEY = "ll-intro-seen";
+    function get(s) { try { return w[s].getItem(KEY); } catch (e) { return null; } }
+    function set(s) { try { w[s].setItem(KEY, "1"); } catch (e) {} }
+    var force = /[?&]intro=1(&|$)/.test(location.search);
+    var mm = function (q) { return w.matchMedia && w.matchMedia(q).matches; };
+    var c = navigator.connection || {};
+    var sameSite = false; try { sameSite = !!d.referrer && new URL(d.referrer).host === location.host; } catch (e) {}
+    if (mm("(prefers-reduced-motion: reduce)") || c.saveData || /(^|-)2g$/.test(c.effectiveType || "") ||
+        (!force && (get("localStorage") || get("sessionStorage") || sameSite || navigator.webdriver ||
+                    /bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent)))) return;
+    set("localStorage"); set("sessionStorage");
+
+    /* ---- film files: swap names here when a new cut lands (first playable source wins) ---- */
+    var FILM = {
+      dir: "assets/film/",
+      poster: "intro-poster.jpg",
+      endFrame: "intro-last-frame.jpg",   /* exact last frame (matches the hero photo), kept under the video during the fade */
+      hold: 0.85,  /* seconds of still hold at the end: the dissolve and hero rise start here */
+      small: [["intro-720.webm", "video/webm"], ["intro-720.mp4", "video/mp4"]],
+      large: [["intro-1080.webm", "video/webm"], ["intro-1080.mp4", "video/mp4"], ["intro-720.mp4", "video/mp4"]]
+    };
+    var small = mm("(max-width: 900px)") || c.effectiveType === "3g";
+    var srcs = small ? FILM.small : FILM.large;
+    var ov = d.createElement("div");
+    ov.className = "ll-intro";
+    ov.setAttribute("role", "dialog");
+    ov.setAttribute("aria-modal", "true");
+    ov.setAttribute("aria-label", "Lantern & Leaves brand film");
+    var v = d.createElement("video");
+    v.muted = true; v.defaultMuted = true; v.autoplay = true; v.playsInline = true; v.preload = "auto";
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("autoplay", "");
+    v.setAttribute("aria-hidden", "true");
+    v.poster = FILM.dir + FILM.poster;
+    srcs.forEach(function (s) { var e = d.createElement("source"); e.src = FILM.dir + s[0]; e.type = s[1]; v.appendChild(e); });
+    var snd = d.createElement("button");
+    snd.type = "button"; snd.className = "ll-intro-btn ll-intro-sound";
+    var skip = d.createElement("button");
+    skip.type = "button"; skip.className = "ll-intro-btn ll-intro-skip";
+    skip.textContent = "Skip intro"; skip.setAttribute("aria-label", "Skip the intro film and enter the site");
+    var ICON_ON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>';
+    var ICON_OFF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l5-4v14l-5-4H4z"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg>';
+    function paintSnd() {
+      snd.innerHTML = (v.muted ? ICON_OFF + "Sound on" : ICON_ON + "Sound off");
+      snd.setAttribute("aria-pressed", v.muted ? "false" : "true");
+      snd.setAttribute("aria-label", v.muted ? "Turn the film's sound on" : "Turn the film's sound off");
+    }
+    paintSnd();
+    ov.appendChild(v); ov.appendChild(snd); ov.appendChild(skip);
+    h.classList.add("intro-on");
+    w.__llIntro = true;
+    d.body.insertBefore(ov, d.body.firstChild);
+
+    // keep the page behind out of the tab order while the film plays
+    var inerted = [];
+    function setInert(on) {
+      if (on) {
+        Array.prototype.forEach.call(d.body.children, function (el) {
+          if (el !== ov && el.tagName !== "SCRIPT" && !el.inert) { el.inert = true; inerted.push(el); }
+        });
+      } else { inerted.forEach(function (el) { el.inert = false; }); inerted = []; }
+    }
+    d.addEventListener("DOMContentLoaded", function () { if (!done) setInert(true); });
+
+    var done = false, started = false, startTimer, stallTimer;
+    function finish(why) {
+      if (done) return;
+      done = true;
+      clearTimeout(startTimer); clearTimeout(stallTimer);
+      w.__llIntroWhy = why;
+      if (preloaded) ov.style.background = "#0d1420 url(" + FILM.dir + FILM.endFrame + ") center / cover no-repeat";
+      ov.classList.add("is-out");
+      h.classList.remove("intro-on");
+      h.classList.add("intro-reveal");
+      setInert(false);
+      d.removeEventListener("keydown", onKey, true);
+      // fade any audio with the picture
+      if (!v.muted && v.volume) {
+        var v0 = v.volume, t0 = performance.now();
+        (function step(t) { var k = Math.min(1, (t - t0) / 1200); v.volume = v0 * (1 - k); if (k < 1) requestAnimationFrame(step); })(t0);
+      }
+      try { d.dispatchEvent(new Event("ll:intro-done")); } catch (e) {}
+      setTimeout(function () {
+        try { v.pause(); v.removeAttribute("src"); while (v.firstChild) v.removeChild(v.firstChild); v.load(); } catch (e) {}
+        if (ov.parentNode) ov.parentNode.removeChild(ov);
+        w.__llIntro = false;
+      }, 1300);
+      setTimeout(function () { h.classList.remove("intro-reveal"); }, 3600);
+    }
+    w.__llIntroSkip = function () { finish("skip"); };
+    skip.addEventListener("click", function () { finish("skip"); });
+    snd.addEventListener("click", function () {
+      v.muted = !v.muted;
+      if (!v.muted) { v.volume = 1; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      paintSnd();
+    });
+    function onKey(e) {
+      var k = e.key;
+      if (k === "Escape" || ((k === "Enter" || k === " " || k === "Spacebar") && e.target !== snd)) {
+        e.preventDefault(); finish("key");
+      }
+    }
+    d.addEventListener("keydown", onKey, true);
+
+    v.addEventListener("playing", function () { started = true; clearTimeout(startTimer); clearTimeout(stallTimer); });
+    v.addEventListener("timeupdate", function () { if (v.currentTime > 0) { started = true; clearTimeout(startTimer); } });
+    v.addEventListener("waiting", function () {
+      clearTimeout(stallTimer);
+      stallTimer = setTimeout(function () { finish("stall"); }, 4000);
+    });
+    var preloaded = false;
+    v.addEventListener("timeupdate", function () {
+      if (!v.duration || v.currentTime < v.duration - 4) return;
+      if (v.currentTime >= v.duration - FILM.hold) { finish("ended"); return; }
+      ov.classList.add("is-settling");
+      if (!preloaded && FILM.endFrame) { preloaded = true; new Image().src = FILM.dir + FILM.endFrame; }
+    });
+    v.addEventListener("ended", function () { finish("ended"); });
+    v.addEventListener("error", function () { finish("error"); });
+    var last = v.lastElementChild; if (last) last.addEventListener("error", function () { finish("error"); });
+    startTimer = setTimeout(function () { if (!started) finish("timeout"); }, 3000);
+    var p = v.play(); if (p && p.catch) p.catch(function (e) { if (!started && e && e.name === "NotAllowedError") finish("autoplay-blocked"); });
+  })();
+  </script>
   <header class="site-header">
     <a class="site-title brand-lockup" href="index.html" aria-current="page"><span class="brand-name">Lantern <span class="amp">&amp;</span> Leaves<span class="brand-sub">Photography</span></span></a>
     <nav class="site-nav" aria-label="Primary">
@@ -155,6 +326,12 @@
     <p class="lsb-notice">Scripture quotations taken from the (LSB®) Legacy Standard Bible®, Copyright © 2021 by The Lockman Foundation. Used by permission. All rights reserved. Managed in partnership with Three Sixteen Publishing Inc. <a href="https://lsbible.org/" rel="noopener">LSBible.org</a> and <a href="https://316publishing.com/" rel="noopener">316publishing.com</a>.</p>
   </footer>
   <script src="js/forest.js" defer></script>
-  <script src="js/hero-quotes.js" defer></script>
+  <script>
+  /* hero verses start after the intro film fades, so the reveal begins with them */
+  (function (d) {
+    function go() { var s = d.createElement("script"); s.src = "js/hero-quotes.js"; d.body.appendChild(s); }
+    if (window.__llIntro) d.addEventListener("ll:intro-done", go, { once: true }); else go();
+  })(document);
+  </script>
 </body>
 </html>
