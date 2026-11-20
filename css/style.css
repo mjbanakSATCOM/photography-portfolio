@@ -1820,7 +1820,7 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 
 .shutter-iris {
   display: block;
-  width: 5.5rem;
+  width: 5.75rem;
   height: auto;
   overflow: visible;
   filter:
