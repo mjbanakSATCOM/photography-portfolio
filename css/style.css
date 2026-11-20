@@ -2196,11 +2196,11 @@ h1, h2, h3, .portal-name, .prose h1, .contact-print-body h1 { font-weight: 400; 
    horizontal lockup in the footer (assets/brand/g4-fonts/)
    ------------------------------------------------------------------ */
 .brand-wordmark-pic { display: block; line-height: 0; }
-.brand-wordmark { display: block; width: auto; height: 54px; }
+.brand-wordmark { display: block; width: auto; height: 70px; }
 .brand-lockup:hover .brand-wordmark { filter: drop-shadow(0 0 8px rgba(217, 164, 65, 0.35)); }
 .footer-lockup-pic { display: block; line-height: 0; }
 .footer-lockup { display: block; width: auto; height: 120px; margin: 0 auto 1rem; opacity: 0.95; }
 @media (max-width: 560px) {
-  .brand-wordmark { height: 42px; }
+  .brand-wordmark { height: 54px; }
   .footer-lockup { height: 100px; }
 }
