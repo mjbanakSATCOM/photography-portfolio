@@ -97,19 +97,30 @@
       poster: "intro-poster.jpg",
       endFrame: "intro-last-frame.jpg",   /* exact last frame (matches the hero photo), kept under the video during the fade */
       hold: 0.85,  /* seconds of still hold at the end: the dissolve and hero rise start here */
+      startGrace: 2.5,  /* if real frames have not begun by then, skip to the site instead of holding a still */
       small: [["intro-720.webm", "video/webm"], ["intro-720.mp4", "video/mp4"]],
       large: [["intro-1080.webm", "video/webm"], ["intro-1080.mp4", "video/mp4"], ["intro-720.mp4", "video/mp4"]]
     };
     var small = mm("(max-width: 900px)") || c.effectiveType === "3g";
-    var srcs = small ? FILM.small : FILM.large;
+    /* Safari / iOS WebKit often report they can play VP9 WebM, then paint only the first frame
+       while currentTime still runs — so the fade at ~13s happens over a frozen still. H.264 only there. */
+    var ua = navigator.userAgent || "";
+    var appleWebKit = /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) ||
+      (/AppleWebKit/i.test(ua) && !/Chrome|Chromium|CriOS|FxiOS|Edg|EdgiOS|OPR|Android/i.test(ua));
+    var srcs = (small ? FILM.small : FILM.large).filter(function (s) {
+      return !appleWebKit || s[1] !== "video/webm";
+    });
     var ov = d.createElement("div");
     ov.className = "ll-intro";
     ov.setAttribute("role", "dialog");
     ov.setAttribute("aria-modal", "true");
     ov.setAttribute("aria-label", "Lantern & Leaves brand film");
+    ov.style.background = "#0d1420 url(" + FILM.dir + FILM.poster + ") center / cover no-repeat";
     var v = d.createElement("video");
     v.muted = true; v.defaultMuted = true; v.autoplay = true; v.playsInline = true; v.preload = "auto";
-    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("autoplay", "");
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
+    v.setAttribute("autoplay", "");
     v.setAttribute("aria-hidden", "true");
     v.poster = FILM.dir + FILM.poster;
     srcs.forEach(function (s) { var e = d.createElement("source"); e.src = FILM.dir + s[0]; e.type = s[1]; v.appendChild(e); });
@@ -142,7 +153,7 @@
     }
     d.addEventListener("DOMContentLoaded", function () { if (!done) setInert(true); });
 
-    var done = false, started = false, startTimer, stallTimer;
+    var done = false, started = false, startTimer, stallTimer, painted = 0;
     function finish(why) {
       if (done) return;
       done = true;
@@ -182,24 +193,65 @@
     }
     d.addEventListener("keydown", onKey, true);
 
-    v.addEventListener("playing", function () { started = true; clearTimeout(startTimer); clearTimeout(stallTimer); });
-    v.addEventListener("timeupdate", function () { if (v.currentTime > 0) { started = true; clearTimeout(startTimer); } });
+    function dropPoster() {
+      try { v.removeAttribute("poster"); } catch (e) {}
+    }
+    function decodedFrames() {
+      try { if (v.getVideoPlaybackQuality) return v.getVideoPlaybackQuality().totalVideoFrames; } catch (e) {}
+      try { if (typeof v.webkitDecodedFrameCount === "number") return v.webkitDecodedFrameCount; } catch (e) {}
+      return null;
+    }
+    function reallyPlaying() {
+      var t = v.currentTime || 0;
+      if (t < 0.2) return false;
+      var q = decodedFrames();
+      if (painted >= 2) return true;
+      if (q !== null && q >= 2) return true;
+      /* no frame API in this browser: time advancing is the best signal we have */
+      return painted === 0 && q === null;
+    }
+    function markStarted() {
+      if (started || !reallyPlaying()) return;
+      started = true;
+      dropPoster();
+      clearTimeout(startTimer); clearTimeout(stallTimer);
+    }
+    if (v.requestVideoFrameCallback) {
+      v.requestVideoFrameCallback(function onFrame() {
+        painted++;
+        markStarted();
+        if (!done) v.requestVideoFrameCallback(onFrame);
+      });
+    }
+    v.addEventListener("playing", function () { clearTimeout(stallTimer); markStarted(); tryPlay(); });
+    v.addEventListener("timeupdate", function () { if (v.currentTime > 0.2) markStarted(); });
     v.addEventListener("waiting", function () {
       clearTimeout(stallTimer);
       stallTimer = setTimeout(function () { finish("stall"); }, 4000);
     });
     var preloaded = false;
     v.addEventListener("timeupdate", function () {
-      if (!v.duration || v.currentTime < v.duration - 4) return;
+      if (!started || !v.duration || v.currentTime < v.duration - 4) return;
       if (v.currentTime >= v.duration - FILM.hold) { finish("ended"); return; }
       ov.classList.add("is-settling");
       if (!preloaded && FILM.endFrame) { preloaded = true; new Image().src = FILM.dir + FILM.endFrame; }
     });
-    v.addEventListener("ended", function () { finish("ended"); });
+    v.addEventListener("ended", function () { if (started) finish("ended"); else finish("timeout"); });
     v.addEventListener("error", function () { finish("error"); });
     var last = v.lastElementChild; if (last) last.addEventListener("error", function () { finish("error"); });
-    startTimer = setTimeout(function () { if (!started) finish("timeout"); }, 3000);
-    var p = v.play(); if (p && p.catch) p.catch(function (e) { if (!started && e && e.name === "NotAllowedError") finish("autoplay-blocked"); });
+    startTimer = setTimeout(function () { if (!reallyPlaying()) finish("timeout"); else markStarted(); }, (FILM.startGrace || 2.5) * 1000);
+    function tryPlay() {
+      if (done || started) return;
+      v.muted = true; v.defaultMuted = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function (e) {
+        if (done || started) return;
+        if (e && e.name === "NotAllowedError") finish("autoplay-blocked");
+      });
+    }
+    v.addEventListener("canplay", tryPlay);
+    v.addEventListener("loadeddata", tryPlay);
+    tryPlay();
   })();
   </script>
   <header class="site-header">
