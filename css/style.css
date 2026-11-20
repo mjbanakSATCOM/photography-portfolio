@@ -2174,7 +2174,7 @@ h1, h2, h3, .portal-name, .prose h1, .contact-print-body h1 { font-weight: 400; 
 }
 .brand-sub { font-size: 0.57rem; }
 .hero-sub { font-size: clamp(0.81rem, 1.8vw, 1.07rem); }
-.hq-ref { font-size: 0.68rem; }
+.hq-ref { font-size: 0.68rem; letter-spacing: 0.18em; } /* verse refs fit one line in the desktop side columns */
 .about-quote cite, .album-quote figcaption { font-size: 0.75rem; }
 .view-album { font-size: 0.81rem; }
 .hero-eyebrow { font-size: 0.79rem; }

@@ -129,7 +129,7 @@
     });
     var c = document.createElement("p");
     c.className = "hq-ref";
-    c.textContent = item.r;
+    c.textContent = item.r.replace(/ (?=\()/g, "\u00a0"); /* keep "(LSB)" with its verse number */
     el.appendChild(p);
     el.appendChild(c);
   }
