@@ -1569,7 +1569,7 @@ body.lightbox-open {
 img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 
 /* Contact form: an old photograph you write a note inside, with a
-   camera-shutter Send button. */
+   Nikon Zf-style black-and-silver shutter-release Send button. */
 
 .contact-page {
   --ink: #2a1c12;
@@ -1587,14 +1587,14 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 
 .contact-print {
   position: relative;
-  padding: 2.15rem 2rem 2.25rem;
+  padding: 3.45rem 3.25rem 3.6rem;
   filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.48)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
 @media (min-width: 700px) {
   .contact-print {
     transform: rotate(-1.15deg);
-    padding: 2.35rem 2.2rem 2.5rem;
+    padding: 3.9rem 3.7rem 4.1rem;
   }
 }
 
@@ -1604,8 +1604,8 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
   z-index: 0;
   pointer-events: none;
   background: var(--mat);
-  -webkit-mask-image: url("../images/backgrounds/contact-print-deckle.png");
-  mask-image: url("../images/backgrounds/contact-print-deckle.png");
+  -webkit-mask-image: url("../images/backgrounds/contact-print-deckle.png?v=2");
+  mask-image: url("../images/backgrounds/contact-print-deckle.png?v=2");
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
   -webkit-mask-mode: luminance;
@@ -1622,7 +1622,12 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
     var(--paper);
   background-color: var(--paper);
   color: var(--ink);
-  box-shadow: inset 0 0 40px rgba(80, 45, 15, 0.12), 0 0 0 1px rgba(70, 48, 24, 0.16);
+  box-shadow:
+    inset 0 0 42px rgba(80, 45, 15, 0.12),
+    inset 0 0 0 1px rgba(50, 32, 14, 0.16),
+    0 0 0 1px rgba(62, 40, 20, 0.34),
+    0 1px 3px rgba(40, 24, 10, 0.28),
+    0 0 0 3px rgba(255, 252, 246, 0.18);
 }
 
 .contact-print-body::before {
@@ -1643,18 +1648,18 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 .photo-corner {
   position: absolute;
   z-index: 2;
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1.5rem;
+  height: 1.5rem;
   pointer-events: none;
   background:
     linear-gradient(var(--diag, 135deg), transparent 48%, #3d2a1a 48%, #3d2a1a 54%, #c9b089 54%, #a89068 100%);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-.photo-corner-tl { top: 1.35rem; left: 1.35rem; --diag: 135deg; }
-.photo-corner-tr { top: 1.35rem; right: 1.35rem; --diag: -135deg; }
-.photo-corner-bl { bottom: 1.35rem; left: 1.35rem; --diag: 45deg; }
-.photo-corner-br { bottom: 1.35rem; right: 1.35rem; --diag: -45deg; }
+.photo-corner-tl { top: 1.7rem; left: 1.7rem; --diag: 135deg; }
+.photo-corner-tr { top: 1.7rem; right: 1.7rem; --diag: -135deg; }
+.photo-corner-bl { bottom: 1.7rem; left: 1.7rem; --diag: 45deg; }
+.photo-corner-br { bottom: 1.7rem; right: 1.7rem; --diag: -45deg; }
 
 .contact-print-body h1 {
   margin: 0 0 0.45rem;
@@ -1758,9 +1763,9 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   margin: 0;
-  padding: 0.2rem;
+  padding: 0.2rem 0.35rem 0.1rem;
   border: none;
   background: none;
   color: var(--ink);
@@ -1769,81 +1774,81 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 
 .shutter-iris {
   display: block;
-  width: 5rem;
-  height: 5rem;
+  width: 5.5rem;
+  height: auto;
+  overflow: visible;
   filter:
-    drop-shadow(0 2px 2px rgba(8, 17, 28, 0.35))
-    drop-shadow(0 5px 8px rgba(8, 17, 28, 0.32));
-  transition: transform 0.35s ease, filter 0.35s ease, brightness 0.35s ease;
+    drop-shadow(0 2px 2px rgba(8, 8, 10, 0.35))
+    drop-shadow(0 5px 8px rgba(8, 8, 10, 0.3));
+  transition: transform 0.28s ease, filter 0.28s ease;
 }
 
 .shutter-iris svg {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   overflow: visible;
 }
 
-.iris-spin,
-.blade-arm {
+.zf-plunger,
+.zf-well-shadow {
   transform-box: view-box;
-  transition: transform 0.35s ease;
+  transform-origin: 50px 50px;
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
 }
 
-.iris-spin {
-  transform-origin: 50px 50px;
+.zf-well-shadow {
+  opacity: 0.32;
 }
 
 .shutter-text {
   font-family: "Caveat", "Playfair Display", Georgia, cursive;
   font-weight: 600;
-  font-size: 1.55rem;
-  letter-spacing: 0.04em;
-  line-height: 1;
+  font-size: 1.42rem;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
   color: #1a2433;
 }
 
 .shutter-submit:hover .shutter-iris,
 .shutter-submit:focus-visible .shutter-iris {
-  transform: translateY(-1px) scale(1.03);
+  transform: translateY(-1px);
   filter:
-    drop-shadow(0 4px 7px rgba(8, 17, 28, 0.5))
-    drop-shadow(0 0 8px rgba(52, 96, 148, 0.42));
-}
-
-.shutter-submit:hover .iris-spin,
-.shutter-submit:focus-visible .iris-spin {
-  transform: rotate(10deg);
-}
-
-.shutter-submit:hover .blade-arm,
-.shutter-submit:focus-visible .blade-arm {
-  transform: rotate(8deg);
+    drop-shadow(0 4px 7px rgba(8, 8, 10, 0.42))
+    drop-shadow(0 0 7px rgba(200, 198, 190, 0.35))
+    brightness(1.05);
 }
 
 .shutter-submit:focus-visible {
-  outline: 2px solid #254b7c;
+  outline: 2px solid #3a3a3c;
   outline-offset: 6px;
   border-radius: 8px;
 }
 
-.shutter-submit.is-shutting .iris-spin {
-  transform: rotate(18deg);
-}
-
-.shutter-submit.is-shutting .blade-arm {
-  transform: rotate(42deg);
-  transition-duration: 0.2s;
+.shutter-submit:active .zf-plunger,
+.shutter-submit.is-shutting .zf-plunger {
+  transform: translateY(3px) scale(0.93);
+  filter: brightness(0.86);
+  transition-duration: 0.09s;
   transition-timing-function: ease-in;
 }
 
+.shutter-submit:active .zf-well-shadow,
+.shutter-submit.is-shutting .zf-well-shadow {
+  opacity: 0.78;
+  transform: translateY(1px) scale(1.06);
+  transition-duration: 0.09s;
+  transition-timing-function: ease-in;
+}
 
 .shutter-submit:active .shutter-iris,
 .shutter-submit.is-shutting .shutter-iris {
-  transform: translateY(3px) scale(0.96);
+  transform: translateY(2px);
   filter:
-    brightness(0.9)
-    drop-shadow(0 1px 1px rgba(8, 17, 28, 0.5));
+    brightness(0.94)
+    drop-shadow(0 1px 1px rgba(8, 8, 10, 0.5));
   transition-duration: 0.09s;
   transition-timing-function: ease-in;
 }
@@ -1854,10 +1859,14 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
   }
 
   .shutter-iris,
-  .iris-spin,
-  .blade-arm,
+  .zf-plunger,
+  .zf-well-shadow,
   .shutter-submit:active .shutter-iris,
-  .shutter-submit.is-shutting .shutter-iris {
+  .shutter-submit.is-shutting .shutter-iris,
+  .shutter-submit:active .zf-plunger,
+  .shutter-submit.is-shutting .zf-plunger,
+  .shutter-submit:active .zf-well-shadow,
+  .shutter-submit.is-shutting .zf-well-shadow {
     transition: none;
   }
 }
@@ -1886,11 +1895,11 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 
 @media (max-width: 480px) {
   .contact-stage {
-    padding: 0;
+    padding: 0.35rem 0.45rem 0.7rem;
   }
 
   .contact-print {
-    padding: 1.65rem 1.45rem 1.75rem;
+    padding: 2.5rem 2.3rem 2.65rem;
   }
 
   .contact-print-body {
@@ -1898,7 +1907,16 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
   }
 
   .photo-corner {
-    width: 1.15rem;
-    height: 1.15rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .photo-corner-tl { top: 1.2rem; left: 1.2rem; }
+  .photo-corner-tr { top: 1.2rem; right: 1.2rem; }
+  .photo-corner-bl { bottom: 1.2rem; left: 1.2rem; }
+  .photo-corner-br { bottom: 1.2rem; right: 1.2rem; }
+
+  .shutter-text {
+    font-size: 1.28rem;
   }
 }

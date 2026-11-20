@@ -1,6 +1,7 @@
-/* Lantern & Leaves: a short shutter-close on the Contact form's Send
-   button, then the form submits as usual. If this script does not run, or
-   the visitor prefers reduced motion, the form posts on its own. */
+/* Lantern & Leaves: a short press-down on the Contact form's Nikon Zf
+   shutter-release button, then the form submits as usual. If this script
+   does not run, or the visitor prefers reduced motion, the form posts on
+   its own. */
 (function () {
   "use strict";
   var form = document.querySelector(".contact-form");
