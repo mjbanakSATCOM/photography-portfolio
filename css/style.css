@@ -1,26 +1,9 @@
 /* Lantern & Leaves — mystical twilight forest theme
    Deep moss, night blue, amber lantern light, parchment text. */
 
-/* Local sans sized to Poppins' widths and line metrics, so the menu wraps the
-   same way before and after the web font loads. */
-@font-face {
-  font-family: "Poppins Fallback";
-  src: local("Arial"), local("Helvetica"), local("Liberation Sans"), local("Arimo");
-  size-adjust: 111.65%;
-  ascent-override: 94.04%;
-  descent-override: 31.35%;
-  line-gap-override: 8.96%;
-}
-
-/* Local serif with Playfair Display's line metrics, used only until the web
-   font arrives, so the hero text keeps the same height and nothing shifts. */
-@font-face {
-  font-family: "Playfair Fallback";
-  src: local("Georgia"), local("Times New Roman"), local("Liberation Serif"), local("DejaVu Serif");
-  ascent-override: 108.2%;
-  descent-override: 25.1%;
-  line-gap-override: 0%;
-}
+/* Type: Adobe Fonts Web Project nyz3quq (loaded in each page <head>).
+   warbler-text = body and small caps, warbler-deck = headings and italic accents,
+   above-the-beyond = the "Lantern & Leaves" wordmark. */
 
 :root {
   --moss: #0f1a14;
@@ -36,10 +19,11 @@
   --focus: #d9a441;
   --gutter: 1.1rem;
   --page-pad: clamp(1.25rem, 3.5vw, 3.25rem);
-  --font: "Poppins", "Poppins Fallback", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
-  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --display: "Playfair Display", "Playfair Fallback", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-  --accent-font: "Playfair Display", "Playfair Fallback", Georgia, serif; /* italic */
+  --font: "warbler-text", Georgia, "Times New Roman", serif;
+  --serif: "warbler-deck", Georgia, "Times New Roman", serif;
+  --display: "warbler-deck", Georgia, "Times New Roman", serif;
+  --accent-font: "warbler-deck", Georgia, serif; /* italic */
+  --script: "above-the-beyond", "Snell Roundhand", "Brush Script MT", cursive;
 }
 
 *,
@@ -1844,7 +1828,8 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 
 .contact-lede {
   margin: 0 0 1.4rem;
-  font-family: "Caveat", "Playfair Display", Georgia, cursive;
+  font-family: var(--accent-font);
+  font-style: italic;
   font-size: 1.45rem;
   line-height: 1.35;
   color: var(--ink-soft);
@@ -1862,7 +1847,8 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 .contact-field label {
   display: block;
   margin: 0 0 0.15rem;
-  font-family: "Caveat", "Playfair Display", Georgia, cursive;
+  font-family: var(--accent-font);
+  font-style: italic;
   font-weight: 600;
   font-size: 1.45rem;
   line-height: 1.2;
@@ -2050,7 +2036,8 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
   justify-content: center;
   gap: 0.25rem;
   margin: 0.55rem 0 0;
-  font-family: "Caveat", "Playfair Display", Georgia, cursive;
+  font-family: var(--accent-font);
+  font-style: italic;
   font-weight: 600;
   font-size: 1.42rem;
   letter-spacing: 0.02em;
@@ -2085,7 +2072,7 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 
 .thanks-home a {
   color: #6b4a1e;
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--accent-font);
   font-style: italic;
   font-size: 1.15rem;
   text-underline-offset: 0.2em;
@@ -2136,4 +2123,70 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
   .zf-send-label {
     font-size: 1.28rem;
   }
+}
+
+
+/* ------------------------------------------------------------------
+   Typography roles for the Adobe Fonts kit (Warbler + Above the Beyond)
+   ------------------------------------------------------------------ */
+html { font-weight: 400; }
+
+/* Wordmark: nav lockup and hero title */
+.brand-name,
+.hero-title .hero-name { font-family: var(--script); font-weight: 400; font-style: normal; word-spacing: 0.1em; }
+.brand-name .amp,
+.hero-title .amp { font-family: var(--script); font-style: normal; font-weight: 400; font-size: 1em; }
+.hero-title { font-size: clamp(1.6rem, 9.6vw, 6rem); line-height: 1.12; }
+.hero-sub { margin-top: 1.9rem; }           /* room for the script's swashes */
+.brand-name { font-size: 1.5rem; line-height: 1.25; }
+.brand-sub { margin-top: 0.35rem; }
+
+/* Headings: Warbler Deck upright */
+h1, h2, h3, .portal-name, .prose h1, .contact-print-body h1 { font-weight: 400; font-style: normal; }
+.album-copy h2 { font-size: clamp(2.6rem, 4.6vw, 3.6rem); }
+.page-header h1 { font-size: clamp(2.8rem, 5vw, 4rem); }
+.prose h1, .about-panel h1 { font-size: clamp(2.3rem, 4vw, 3.1rem); }
+.about-panel h2 { font-family: var(--display); font-style: normal; font-size: clamp(1.7rem, 2.6vw, 2.1rem); }
+.about-panel .about-film-title { font-size: clamp(2rem, 3.2vw, 2.6rem); }
+.contact-print-body h1 { font-size: clamp(2.4rem, 4vw, 3.2rem); }
+.portal-name { font-size: 1.8rem; }
+
+/* Accents, verses and quotes: Warbler Deck italic */
+.hero-tagline, .tagline, .accent, .album-subtitle, .page-header .album-intro, .hq-text,
+.about-quote p, .about-signoff, .contact-lede, .contact-field label, .zf-send-label,
+.site-footer > p:not(.lsb-notice) { font-family: var(--accent-font); font-style: italic; font-weight: 400; }
+.hero-tagline { font-size: clamp(1.5rem, 2.7vw, 1.95rem); }
+.album-subtitle { font-size: 1.45rem; margin-top: 0.4rem; }
+.page-header .album-intro { font-size: 1.25rem; line-height: 1.55; max-width: 38rem; }
+.hq-text { font-size: 1.25rem; line-height: 1.45; }
+.about-quote p { font-size: 1.5rem; line-height: 1.45; }
+.about-signoff { font-size: 1.4rem; }
+.contact-lede { font-size: 1.3rem; line-height: 1.45; }
+.contact-field label { font-size: 1.35rem; }
+.zf-send-label { font-size: 1.15rem; letter-spacing: 0; }
+.site-footer > p:not(.lsb-notice) { font-size: 1.2rem; text-transform: none; letter-spacing: 0.01em; }
+
+/* Small caps: Warbler Text Bold, about 13% larger than before */
+.brand-sub, .hero-sub, .hq-ref, .about-quote cite, .album-quote figcaption,
+.hero-eyebrow, .view-album, .site-title {
+  font-family: var(--font);
+  font-weight: 700;
+}
+.brand-sub { font-size: 0.57rem; }
+.hero-sub { font-size: clamp(0.81rem, 1.8vw, 1.07rem); }
+.hq-ref { font-size: 0.68rem; }
+.about-quote cite, .album-quote figcaption { font-size: 0.75rem; }
+.view-album { font-size: 0.81rem; }
+.hero-eyebrow { font-size: 0.79rem; }
+
+.site-nav a { font-size: 1rem; }
+
+/* Lightbox arrows and close keep a system serif (symbols) */
+.lightbox-btn { font-family: Georgia, "Times New Roman", serif; }
+
+@media (max-width: 560px) {
+  .brand-name { font-size: 1.25rem; }
+  .site-nav a { font-size: 0.9rem; }       /* keeps the phone menu to two lines */
+  .hq-line .hq-text, .hq-text { font-size: 1.2rem; line-height: 1.45; }
+  .about-quote p { font-size: 1.3rem; }
 }
