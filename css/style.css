@@ -1615,7 +1615,7 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 }
 
 /* Contact form: an old photograph you write a note inside, with a
-   Nikon Zf-style black-and-silver shutter-release Send button. */
+   top-down Nikon Zf whose shutter release is the Send button. */
 
 .contact-page {
   --ink: #2a1c12;
@@ -1801,102 +1801,146 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 
 .contact-send {
   display: flex;
-  justify-content: center;
-  margin: 1.5rem 0 0.2rem;
-}
-
-.shutter-submit {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
-  margin: 0;
-  padding: 0.2rem 0.35rem 0.1rem;
-  border: none;
-  background: none;
-  color: var(--ink);
-  cursor: pointer;
+  margin: 1.6rem 0 0.2rem;
 }
 
-.shutter-iris {
-  display: block;
-  width: 5.75rem;
-  height: auto;
-  overflow: visible;
-  filter:
-    drop-shadow(0 2px 2px rgba(8, 8, 10, 0.35))
-    drop-shadow(0 5px 8px rgba(8, 8, 10, 0.3));
-  transition: transform 0.28s ease, filter 0.28s ease;
+/* Top-down Nikon Zf illustration; its own shutter release is the Send
+   button. The base image has the release recessed into a dark well, and
+   the brushed-silver cap sits on top inside the button so it can sink. */
+.zf-camera-send {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1251 / 485;
 }
 
-.shutter-iris svg {
+.zf-camera-send picture,
+.zf-camera-img {
   display: block;
   width: 100%;
-  height: auto;
-  overflow: visible;
+  height: 100%;
 }
 
-.zf-plunger,
-.zf-well-shadow {
-  transform-box: view-box;
-  transform-origin: 50px 50px;
-  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+.zf-camera-img {
+  filter:
+    drop-shadow(0 2px 2px rgba(42, 28, 18, 0.32))
+    drop-shadow(0 7px 12px rgba(42, 28, 18, 0.26));
+  pointer-events: none;
 }
 
-.zf-well-shadow {
-  opacity: 0.32;
+.zf-shutter-hotspot {
+  position: absolute;
+  left: 78.584%;
+  top: 30.162%;
+  width: 6.684%;
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #0b0b0d;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.9);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.shutter-text {
+/* Comfortable invisible tap target; no visual shift. */
+.zf-shutter-hotspot::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+}
+
+/* Warm lantern ring around the collar so the shutter reads as clickable. */
+.zf-shutter-hotspot::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1.5px rgba(217, 164, 65, 0.5),
+    0 0 7px 1px rgba(217, 164, 65, 0.28);
+  pointer-events: none;
+  transition: box-shadow 0.25s ease;
+}
+
+.zf-cap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 105.24%;
+  height: 105.24%;
+  margin: 0;
+  border-radius: 50%;
+  background: url("../images/backgrounds/nikon-zf-shutter-cap.png?v=1") center / 100% 100% no-repeat;
+  background-image: image-set(
+    url("../images/backgrounds/nikon-zf-shutter-cap.webp?v=1") type("image/webp"),
+    url("../images/backgrounds/nikon-zf-shutter-cap.png?v=1") type("image/png"));
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.55));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.zf-shutter-hotspot:hover::after,
+.zf-shutter-hotspot:focus-visible::after {
+  box-shadow:
+    0 0 0 2px #d9a441,
+    0 0 12px 3px rgba(217, 164, 65, 0.6);
+}
+
+.zf-shutter-hotspot:hover .zf-cap,
+.zf-shutter-hotspot:focus-visible .zf-cap {
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.55)) brightness(1.1);
+}
+
+.zf-shutter-hotspot:focus-visible {
+  outline: none;
+}
+
+.zf-shutter-hotspot:active .zf-cap,
+.zf-shutter-hotspot.is-shutting .zf-cap {
+  transform: translate(-50%, -50%) translateY(3px) scale(0.91);
+  filter: drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.9)) brightness(0.8);
+  transition-duration: 0.09s;
+  transition-timing-function: ease-in;
+}
+
+.zf-shutter-hotspot:active,
+.zf-shutter-hotspot.is-shutting {
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 1);
+}
+
+.zf-shutter-hotspot.is-shutting::after {
+  box-shadow:
+    0 0 0 2px #d9a441,
+    0 0 12px 3px rgba(217, 164, 65, 0.6);
+}
+
+.zf-send-label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0.55rem 0 0;
   font-family: "Caveat", "Playfair Display", Georgia, cursive;
   font-weight: 600;
   font-size: 1.42rem;
   letter-spacing: 0.02em;
   line-height: 1.15;
-  text-align: center;
   white-space: nowrap;
   color: #1a2433;
 }
 
-.shutter-submit:hover .shutter-iris,
-.shutter-submit:focus-visible .shutter-iris {
-  transform: translateY(-1px);
-  filter:
-    drop-shadow(0 4px 7px rgba(8, 8, 10, 0.42))
-    drop-shadow(0 0 7px rgba(200, 198, 190, 0.35))
-    brightness(1.05);
-}
-
-.shutter-submit:focus-visible {
-  outline: 2px solid #3a3a3c;
-  outline-offset: 6px;
-  border-radius: 8px;
-}
-
-.shutter-submit:active .zf-plunger,
-.shutter-submit.is-shutting .zf-plunger {
-  transform: translateY(3px) scale(0.93);
-  filter: brightness(0.86);
-  transition-duration: 0.09s;
-  transition-timing-function: ease-in;
-}
-
-.shutter-submit:active .zf-well-shadow,
-.shutter-submit.is-shutting .zf-well-shadow {
-  opacity: 0.78;
-  transform: translateY(1px) scale(1.06);
-  transition-duration: 0.09s;
-  transition-timing-function: ease-in;
-}
-
-.shutter-submit:active .shutter-iris,
-.shutter-submit.is-shutting .shutter-iris {
-  transform: translateY(2px);
-  filter:
-    brightness(0.94)
-    drop-shadow(0 1px 1px rgba(8, 8, 10, 0.5));
-  transition-duration: 0.09s;
-  transition-timing-function: ease-in;
+.zf-ink-arrow {
+  width: 1.9rem;
+  height: auto;
+  margin-bottom: 0.55rem;
+  color: #3a2a1c;
+  opacity: 0.8;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1904,15 +1948,8 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
     transform: none;
   }
 
-  .shutter-iris,
-  .zf-plunger,
-  .zf-well-shadow,
-  .shutter-submit:active .shutter-iris,
-  .shutter-submit.is-shutting .shutter-iris,
-  .shutter-submit:active .zf-plunger,
-  .shutter-submit.is-shutting .zf-plunger,
-  .shutter-submit:active .zf-well-shadow,
-  .shutter-submit.is-shutting .zf-well-shadow {
+  .zf-cap,
+  .zf-shutter-hotspot::after {
     transition: none;
   }
 }
@@ -1962,7 +1999,17 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
   .photo-corner-bl { bottom: 1.2rem; left: 1.2rem; }
   .photo-corner-br { bottom: 1.2rem; right: 1.2rem; }
 
-  .shutter-text {
+  .zf-camera-send {
+    width: calc(100% + 1.6rem);
+    max-width: none;
+    margin: 0 -0.8rem;
+  }
+
+  .zf-shutter-hotspot::before {
+    inset: -15px;
+  }
+
+  .zf-send-label {
     font-size: 1.28rem;
   }
 }

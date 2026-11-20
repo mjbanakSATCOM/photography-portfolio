@@ -1,12 +1,12 @@
 /* Lantern & Leaves: a short press-down on the Contact form's Nikon Zf
-   shutter-release button, then the form submits as usual. If this script
+   shutter release, then the form submits as usual. If this script
    does not run, or the visitor prefers reduced motion, the form posts on
    its own. */
 (function () {
   "use strict";
   var form = document.querySelector(".contact-form");
   if (!form) return;
-  var btn = form.querySelector(".shutter-submit");
+  var btn = form.querySelector(".zf-shutter-hotspot");
   if (!btn) return;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
