@@ -1568,6 +1568,52 @@ body.lightbox-open {
 /* Light photo protection (pairs with forest.js) */
 img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 
+/* Contact page: dark, blurred autumn-forest background (fixed layer, not
+   background-attachment: fixed, so it is scroll-safe on phones), faded
+   into the page colour, matching the About page treatment. */
+.contact-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--deep);
+}
+
+.contact-bg picture,
+.contact-bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.contact-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(9, 15, 12, 0.28) 0%, transparent 16%, transparent 84%, rgba(9, 15, 12, 0.35) 100%);
+}
+
+.contact-bg .motes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.contact-page:has(.contact-bg) .page-main,
+.contact-page:has(.contact-bg) .site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-page:has(.contact-bg) .page-main {
+  background: none;
+  padding-top: clamp(2.5rem, 8vh, 5.5rem);
+  padding-bottom: clamp(3rem, 12vh, 7rem);
+}
+
 /* Contact form: an old photograph you write a note inside, with a
    Nikon Zf-style black-and-silver shutter-release Send button. */
 
