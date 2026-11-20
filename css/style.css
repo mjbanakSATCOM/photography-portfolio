@@ -2192,15 +2192,16 @@ h1, h2, h3, .portal-name, .prose h1, .contact-print-body h1 { font-weight: 400; 
 }
 
 /* ------------------------------------------------------------------
-   F3 Horizontal Deck logo kit: raster wordmark in the header,
+   F3 Horizontal Deck logo kit: raster horizontal lockup in the header,
    horizontal lockup in the footer (assets/brand/g4-fonts/)
    ------------------------------------------------------------------ */
 .brand-wordmark-pic { display: block; line-height: 0; }
-.brand-wordmark { display: block; width: auto; height: 70px; }
+.brand-wordmark { display: block; width: auto; height: 136px; }
+@media (max-width: 960px) { .brand-wordmark { height: 108px; } }
 .brand-lockup:hover .brand-wordmark { filter: drop-shadow(0 0 8px rgba(217, 164, 65, 0.35)); }
 .footer-lockup-pic { display: block; line-height: 0; }
 .footer-lockup { display: block; width: auto; height: 120px; margin: 0 auto 1rem; opacity: 0.95; }
 @media (max-width: 560px) {
-  .brand-wordmark { height: 54px; }
+  .brand-wordmark { height: 92px; }
   .footer-lockup { height: 100px; }
 }
