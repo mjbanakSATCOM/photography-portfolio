@@ -1584,7 +1584,13 @@ body.lightbox-open {
 
 /* About: the brand film, click to play (preload none) */
 .about-film {
-  margin: 1.4rem 0 0.4rem;
+  margin: 2.4rem 0 0.6rem;
+}
+
+/* video first, then the title and caption centred beneath it like a title card */
+.about-panel .about-film-title {
+  margin: 1.15rem 0 0;
+  text-align: center;
 }
 
 .about-film-frame {
@@ -1647,7 +1653,7 @@ body.lightbox-open {
 }
 
 .about-film figcaption {
-  margin-top: 0.75rem;
+  margin-top: 0.3rem;
   text-align: center;
   font-family: var(--accent-font);
   font-style: italic;
