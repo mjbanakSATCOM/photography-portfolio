@@ -254,22 +254,23 @@ button:focus-visible {
 
 .hero-badge {
   display: block;
-  margin: 0 auto 1.1rem;
-  width: clamp(120px, 18vw, 200px);
+  margin: 0 auto 0.6rem;
+  width: clamp(150px, 17vw, 230px);
 }
 
+/* G4 Drifting Breeze mark: the amber glow is baked into the image,
+   so no CSS glow here. */
 .hero-badge-img {
   display: block;
   width: 100%;
   height: auto;
-  opacity: 0.6;
-  filter: drop-shadow(0 0 24px rgba(217, 164, 65, 0.35));
+  opacity: 0.9;
   animation: badge-breathe 7s ease-in-out infinite alternate;
 }
 
 @keyframes badge-breathe {
-  from { opacity: 0.6; }
-  to { opacity: 0.72; }
+  from { opacity: 0.9; }
+  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1228,7 +1229,7 @@ body.lightbox-open {
   }
 }
 
-/* Brand: Leaf Studio logo package (nav lockup, hero emblem, footer badge) */
+/* Brand: Leaf Studio logo package (nav lockup, hero emblem, footer mark) */
 
 .visually-hidden {
   position: absolute !important;
@@ -1256,7 +1257,7 @@ body.lightbox-open {
 }
 
 .brand-badge-pic,
-.footer-badge-pic {
+.footer-mark-pic {
   display: block;
 }
 
@@ -1306,11 +1307,15 @@ body.lightbox-open {
   filter: drop-shadow(0 0 10px rgba(217, 164, 65, 0.45));
 }
 
-.footer-badge {
-  width: 40px;
-  height: 40px;
+/* Vertical lantern mark (176x256): fixed height, natural width, no crop. */
+.footer-mark {
+  display: block;
+  width: auto;
+  height: 64px;
   margin: 0 auto 0.8rem;
-  opacity: 0.92;
+  border-radius: 0;
+  object-fit: contain;
+  opacity: 0.95;
 }
 
 @media (max-width: 560px) {
