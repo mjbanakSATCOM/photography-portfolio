@@ -254,8 +254,8 @@ button:focus-visible {
 
 .hero-badge {
   display: block;
-  margin: 0 auto 0.6rem;
-  width: clamp(150px, 17vw, 230px);
+  margin: 0 auto 0.4rem;
+  width: clamp(96px, 10.5vw, 145px);
 }
 
 /* G4 Drifting Breeze mark: the amber glow is baked into the image,
