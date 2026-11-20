@@ -253,14 +253,26 @@ button:focus-visible {
 }
 
 .hero-badge {
+  position: relative;
   display: block;
   margin: 0 auto 0.4rem;
-  width: clamp(96px, 10.5vw, 145px);
+  width: clamp(115px, 12.6vw, 174px);
 }
 
-/* G4 Drifting Breeze mark: the amber glow is baked into the image,
-   so no CSS glow here. */
+/* Slight soft amber glow behind the mark (adds to the glow baked into
+   the G4 image). Kept low opacity so it reads as lantern light, not neon. */
+.hero-badge::before {
+  content: "";
+  position: absolute;
+  inset: -22%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 52%, rgba(217, 164, 65, 0.22) 0%, rgba(217, 164, 65, 0.09) 38%, rgba(217, 164, 65, 0) 68%);
+}
+
 .hero-badge-img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: auto;
