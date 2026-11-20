@@ -1712,6 +1712,29 @@ img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; -we
 .photo-corner-bl { bottom: 1.7rem; left: 1.7rem; --diag: 45deg; }
 .photo-corner-br { bottom: 1.7rem; right: 1.7rem; --diag: -45deg; }
 
+/* Studio crest: the G4 lantern mark centered above the card heading,
+   echoing the centered Nikon Zf at the bottom of the card. */
+.contact-crest {
+  display: block;
+  width: max-content;
+  margin: 0.15rem auto 0.55rem;
+}
+
+.contact-crest-img {
+  display: block;
+  width: auto;
+  height: 62px;
+  filter:
+    drop-shadow(0 1px 1px rgba(60, 36, 14, 0.35))
+    drop-shadow(0 3px 6px rgba(60, 36, 14, 0.22));
+}
+
+@media (max-width: 480px) {
+  .contact-crest-img {
+    height: 54px;
+  }
+}
+
 .contact-print-body h1 {
   margin: 0 0 0.45rem;
   font-family: var(--serif);
