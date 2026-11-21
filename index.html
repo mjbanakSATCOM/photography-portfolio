@@ -93,6 +93,7 @@
     /* ---- film files: swap names here when a new cut lands (first playable source wins) ---- */
     var FILM = {
       dir: "assets/film/",
+      v: "?v=2",  /* cache-buster: bump whenever the film files are replaced */
       poster: "intro-poster.jpg",
       endFrame: "intro-last-frame.jpg",   /* exact last frame (matches the hero photo), kept under the video during the fade */
       hold: 0.85,  /* seconds of still hold at the end: the dissolve and hero rise start here */
@@ -115,14 +116,14 @@
     ov.setAttribute("role", "dialog");
     ov.setAttribute("aria-modal", "true");
     ov.setAttribute("aria-label", "Lantern & Leaves brand film");
-    ov.style.background = "#0d1420 url(" + FILM.dir + FILM.poster + ") center / cover no-repeat";
+    ov.style.background = "#0d1420 url(" + FILM.dir + FILM.poster + FILM.v + ") center / cover no-repeat";
     var v = d.createElement("video");
     v.muted = true; v.defaultMuted = true; v.autoplay = true; v.playsInline = true; v.preload = "auto";
     v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
     v.setAttribute("autoplay", "");
     v.setAttribute("aria-hidden", "true");
-    v.poster = FILM.dir + FILM.poster;
-    srcs.forEach(function (s) { var e = d.createElement("source"); e.src = FILM.dir + s[0]; e.type = s[1]; v.appendChild(e); });
+    v.poster = FILM.dir + FILM.poster + FILM.v;
+    srcs.forEach(function (s) { var e = d.createElement("source"); e.src = FILM.dir + s[0] + FILM.v; e.type = s[1]; v.appendChild(e); });
     var snd = d.createElement("button");
     snd.type = "button"; snd.className = "ll-intro-btn ll-intro-sound";
     var skip = d.createElement("button");
@@ -158,7 +159,7 @@
       done = true;
       clearTimeout(startTimer); clearTimeout(stallTimer);
       w.__llIntroWhy = why;
-      if (preloaded) ov.style.background = "#0d1420 url(" + FILM.dir + FILM.endFrame + ") center / cover no-repeat";
+      if (preloaded) ov.style.background = "#0d1420 url(" + FILM.dir + FILM.endFrame + FILM.v + ") center / cover no-repeat";
       ov.classList.add("is-out");
       h.classList.remove("intro-on");
       h.classList.add("intro-reveal");
@@ -233,7 +234,7 @@
       if (!started || !v.duration || v.currentTime < v.duration - 4) return;
       if (v.currentTime >= v.duration - FILM.hold) { finish("ended"); return; }
       ov.classList.add("is-settling");
-      if (!preloaded && FILM.endFrame) { preloaded = true; new Image().src = FILM.dir + FILM.endFrame; }
+      if (!preloaded && FILM.endFrame) { preloaded = true; new Image().src = FILM.dir + FILM.endFrame + FILM.v; }
     });
     v.addEventListener("ended", function () { if (started) finish("ended"); else finish("timeout"); });
     v.addEventListener("error", function () { finish("error"); });
