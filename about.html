@@ -59,10 +59,11 @@
     <article class="prose about-panel">
       <figure class="about-film">
         <div class="about-film-frame">
-          <video controls preload="none" playsinline controlslist="nodownload" poster="assets/film/full-poster.jpg?v=3" width="1280" height="720" aria-label="Lantern &amp; Leaves brand film, 42 seconds, with music">
-            <source media="(max-width: 900px)" src="assets/film/full-720.webm?v=3" type="video/webm">
-            <source media="(max-width: 900px)" src="assets/film/full-720.mp4?v=3" type="video/mp4">
-            <source src="assets/film/full-1080.mp4?v=3" type="video/mp4">
+          <video controls preload="none" playsinline controlslist="nodownload" poster="assets/film/full-poster.jpg?v=4" width="1280" height="720" aria-label="Lantern &amp; Leaves brand film, 42 seconds, with music">
+            <source media="(max-width: 900px)" src="assets/film/full-720.webm?v=4" type="video/webm">
+            <source media="(max-width: 900px)" src="assets/film/full-720.mp4?v=4" type="video/mp4">
+            <source src="assets/film/full-1080.webm?v=4" type="video/webm">
+            <source src="assets/film/full-1080.mp4?v=4" type="video/mp4">
           </video>
           <button class="about-film-play" type="button" aria-label="Play the film" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button>
         </div>
@@ -100,6 +101,16 @@
   (function () {
     var f = document.querySelector(".about-film"); if (!f) return;
     var v = f.querySelector("video"), b = f.querySelector(".about-film-play");
+    /* Safari / iOS WebKit can claim VP9 WebM support and then paint only the first frame
+       (same issue as the home intro), so WebKit gets the H.264 MP4 sources only. */
+    var ua = navigator.userAgent || "";
+    var appleWebKit = /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) ||
+      (/AppleWebKit/i.test(ua) && !/Chrome|Chromium|CriOS|FxiOS|Edg|EdgiOS|OPR|Android/i.test(ua));
+    if (appleWebKit) {
+      Array.prototype.forEach.call(v.querySelectorAll('source[type="video/webm"]'), function (s) { s.parentNode.removeChild(s); });
+      v.load();
+    }
     b.hidden = false;
     b.addEventListener("click", function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); });
     v.addEventListener("play", function () { f.classList.add("is-playing"); });
