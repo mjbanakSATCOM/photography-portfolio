@@ -101,7 +101,11 @@
   // side spots hug the block at CLEAR, or at the most clearance the window
   // allows while keeping the side block SIDEW wide. Every block also keeps
   // EDGE + MARGIN from the window edges and the menu.
+  // Side columns sit SIDE_CLEAR from the title block when there is room, and never
+  // closer than SIDE_MIN (Mike, Nov 20: "a bit farther away from the center text").
+  // XMARGIN is the gap from the window edge beyond the hero padding.
   var CLEAR = 150, MINW = 160, SIDEW = 190, MAXW = 300, EDGE = 24, MARGIN = 48;
+  var SIDE_CLEAR = 190, SIDE_MIN = 75, XMARGIN = 10;
   var SIDE_Y = [0.06, 0.3, 0.5, 0.7, 0.94], TB_X = [0.12, 0.6];
 
   function bag(items) {             // shuffle bag: no repeats until all shown
@@ -158,7 +162,7 @@
     function candidates() {
       var W = hero.clientWidth, H = hero.clientHeight;
       var hc = hero.querySelector(".hero-content");
-      var pad = ((hc && parseFloat(getComputedStyle(hc).paddingLeft)) || 40) + MARGIN;
+      var pad = ((hc && parseFloat(getComputedStyle(hc).paddingLeft)) || 40) + XMARGIN;
       var parts = [rel(".hero-badge-img"), rel(".hero-eyebrow", true), rel(".hero-name", true), rel(".hero-tagline", true)].filter(Boolean);
       var blk = { l: Math.min.apply(0, parts.map(function (p) { return p.l; })),
                   t: Math.min.apply(0, parts.map(function (p) { return p.t; })),
@@ -167,7 +171,7 @@
       var head = rel(".site-header"), cue = rel(".scroll-cue");
       var top = (head ? Math.max(0, head.b) : 0) + EDGE + MARGIN, bottom = H - EDGE - MARGIN;
       var room = L ? blk.l - pad : W - pad - blk.r;            // beside the block
-      var cs = Math.max(EDGE, Math.min(CLEAR, room - SIDEW));   // side clearance
+      var cs = Math.max(SIDE_MIN, Math.min(SIDE_CLEAR, room - SIDEW));   // side clearance
       var sw = Math.min(MAXW, room - cs), out = [];
       function add(id, x, y, w, h, clear) {
         var c = { l: x, t: y, r: x + w, b: y + h };
@@ -176,7 +180,7 @@
         if (L ? c.r > W / 2 - 12 : c.l < W / 2 + 12) return;   // own half only
         out.push({ id: id, x: x, y: y, w: w, clear: clear });
       }
-      if (sw >= MINW) {
+      if (sw >= SIDEW) {               // narrower side columns would wrap the verse refs
         var sh = heightAt(sw);
         SIDE_Y.forEach(function (f, i) {
           add("S" + i, L ? blk.l - cs - sw : blk.r + cs, top + f * Math.max(0, bottom - top - sh), sw, sh, cs);

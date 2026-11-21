@@ -381,7 +381,7 @@
   <script>
   /* hero verses start after the intro film fades, so the reveal begins with them */
   (function (d) {
-    function go() { var s = d.createElement("script"); s.src = "js/hero-quotes.js"; d.body.appendChild(s); }
+    function go() { var s = d.createElement("script"); s.src = "js/hero-quotes.js?v=2"; d.body.appendChild(s); }
     if (window.__llIntro) d.addEventListener("ll:intro-done", go, { once: true }); else go();
   })(document);
   </script>
