@@ -2211,3 +2211,156 @@ h1, h2, h3, .portal-name, .prose h1, .contact-print-body h1 { font-weight: 400; 
   .brand-wordmark { height: 54px; }
   .footer-lockup { height: 100px; }
 }
+
+/* ------------------------------------------------------------------
+   Mosaic gallery wall (js/gallery-mosaic.js): whole prints, each in its
+   own shape and white matte, laid out in justified rows broken up by a
+   larger featured print beside a stacked column. Absolute positions are
+   set by the script; without JS the column layout above is used.
+   ------------------------------------------------------------------ */
+.masonry.mosaic {
+  column-count: auto;
+  columns: auto;
+  position: relative;
+}
+.masonry.mosaic > a {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  background: #f4f1ea;          /* matte colour while the thumbnail loads */
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.38);
+}
+.masonry.mosaic picture,
+.masonry.mosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* tiles keep the print's own shape; this only hides sub-pixel rounding */
+}
+.masonry.mosaic > a.is-feature {
+  box-shadow: 0 0 0 1px rgba(217, 164, 65, 0.14), 0 14px 36px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 600px) {
+  .masonry.mosaic > a { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); border-radius: 1px; }
+  .masonry.mosaic > a::after { background-color: rgba(5, 8, 6, 0.16); }
+  .masonry.mosaic > a.is-lit,
+  .masonry.mosaic > a:focus-visible { box-shadow: 0 0 0 1px rgba(217, 164, 65, 0.3), 0 0 16px rgba(217, 164, 65, 0.2), 0 6px 16px rgba(0, 0, 0, 0.45); }
+}
+
+/* ------------------------------------------------------------------
+   Photo viewer v2: stage, caption bar, spinner, swipe hint, phone layout
+   ------------------------------------------------------------------ */
+.lightbox { touch-action: pinch-zoom; overscroll-behavior: contain; }
+.lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.lightbox-figure { will-change: transform; }
+.lightbox.is-open .lightbox-figure { opacity: var(--fade, 1); }
+.lightbox.is-dragging { background: rgba(4, 7, 5, calc(0.97 * var(--fade, 1))); }
+.lightbox-image { -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
+.lightbox-caption { display: flex; gap: 0.9rem; align-items: baseline; justify-content: center; text-align: center; }
+.lightbox-count {
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: rgba(236, 226, 205, 0.55);
+}
+.lightbox-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 214, 140, 0.95) 0 18%, rgba(217, 164, 65, 0.35) 40%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  animation: ll-lantern 1.4s ease-in-out infinite;
+}
+.lightbox.is-loading .lightbox-spinner { opacity: 1; transition-delay: 0.25s; }
+@keyframes ll-lantern { 0%, 100% { transform: scale(0.8); } 50% { transform: scale(1.15); } }
+.lightbox-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(6.4rem + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: rgba(9, 15, 12, 0.7);
+  border: 1px solid rgba(217, 164, 65, 0.3);
+  color: var(--soft);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.lightbox.show-hint .lightbox-hint { opacity: 1; }
+body.lightbox-open { position: fixed; left: 0; right: 0; width: 100%; }
+
+@media (max-width: 700px), (pointer: coarse) and (max-height: 500px) {
+  .lightbox {
+    padding: 0;
+    background: radial-gradient(ellipse 80% 45% at 50% 48%, rgba(217, 164, 65, 0.07), transparent 70%), #040705;
+  }
+  .lightbox-figure { width: 100%; height: 100%; justify-content: center; }
+  .lightbox-figure picture { display: flex; align-items: center; justify-content: center; flex: 1 1 auto; min-height: 0; width: 100%; }
+  .lightbox-figure img {
+    max-width: 100vw;
+    max-height: calc(100vh - 7rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - 7rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    border-radius: 0;
+    box-shadow: 0 0 40px rgba(217, 164, 65, 0.16);
+  }
+  .lightbox-caption {
+    flex: 0 0 auto;
+    margin: 0;
+    width: 100%;
+    padding: 0.9rem 1rem calc(1.1rem + env(safe-area-inset-bottom, 0px));
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.98rem;
+  }
+  .lightbox-figure::before {     /* matching space at the top for the close button */
+    content: "";
+    flex: 0 0 auto;
+    height: calc(3.4rem + env(safe-area-inset-top, 0px));
+  }
+  .lightbox-close {
+    top: calc(0.35rem + env(safe-area-inset-top, 0px));
+    right: calc(0.35rem + env(safe-area-inset-right, 0px));
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    font-size: 2rem;
+    border-radius: 50%;
+    background: rgba(9, 15, 12, 0.55);
+    z-index: 2;
+  }
+  .lightbox-prev,
+  .lightbox-next { display: none; }      /* swipe instead */
+}
+@media (min-width: 701px) and (pointer: coarse) {
+  .lightbox-btn { min-width: 48px; min-height: 48px; }
+}
+
+/* ------------------------------------------------------------------
+   Phones: the two-line menu slides away while you scroll down through an
+   album and comes back the moment you scroll up, so photos get the screen.
+   ------------------------------------------------------------------ */
+@media (max-width: 560px) {
+  .site-header.can-hide { transition: transform 0.35s ease, background 0.5s ease, border-color 0.5s ease; }
+  .site-header.can-hide.is-tucked { transform: translateY(-100%); }
+  .site-nav a { padding: 0.55rem 0; }    /* taller tap targets, same look */
+  .site-nav { gap: 0 1rem; }
+}
+.masonry.mosaic img:not([src]) { opacity: 0; }   /* held back until scrolled near */
