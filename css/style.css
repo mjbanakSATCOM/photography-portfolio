@@ -585,6 +585,13 @@ h1, h2, h3, .wordmark { font-family: var(--display); font-weight: 500; }
    (the photo you just left, or a neighbour, could vanish for a moment while
    its layer was torn down). Hover adds only a warm amber glow around the photo. */
 
+/* Keep the grid invisible until the per-visit shuffle has run, so the static
+   HTML order never flashes. Visitors without JavaScript never get the .js
+   class and see the photos in their authored order. */
+html.js .masonry { visibility: hidden; }
+html.gallery-ready .masonry { visibility: visible; }
+
+
 .masonry {
   column-count: 4;
   column-gap: var(--gutter);

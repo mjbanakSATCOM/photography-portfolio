@@ -1,8 +1,12 @@
 (function () {
   "use strict";
 
-  var links = Array.prototype.slice.call(document.querySelectorAll(".photo-link"));
-  if (!links.length) return;
+  function currentLinks() {
+    var inGrid = Array.prototype.slice.call(document.querySelectorAll(".masonry .photo-link"));
+    return inGrid.length ? inGrid : Array.prototype.slice.call(document.querySelectorAll(".photo-link"));
+  }
+
+  if (!currentLinks().length) return;
 
   var index = 0;
   var lastFocus = null;
@@ -52,8 +56,10 @@
   }
 
   function show(i) {
-    index = (i + links.length) % links.length;
-    var data = photoData(links[index]);
+    var list = currentLinks();
+    if (!list.length) return;
+    index = (i + list.length) % list.length;
+    var data = photoData(list[index]);
     img.alt = data.alt;
     if (data.width) img.setAttribute("width", data.width);
     if (data.height) img.setAttribute("height", data.height);
@@ -67,9 +73,9 @@
       img.src = data.jpg;
       if (img.complete && img.naturalWidth) loaded();
     }
-    caption.textContent = data.caption + "  ·  " + (index + 1) + " of " + links.length;
-    btnPrev.disabled = links.length < 2;
-    btnNext.disabled = links.length < 2;
+    caption.textContent = data.caption + "  ·  " + (index + 1) + " of " + list.length;
+    btnPrev.disabled = list.length < 2;
+    btnNext.disabled = list.length < 2;
   }
 
   function open(i) {
@@ -96,11 +102,15 @@
     if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
   }
 
-  links.forEach(function (link, i) {
-    link.addEventListener("click", function (event) {
-      event.preventDefault();
-      open(i);
-    });
+  document.addEventListener("click", function (event) {
+    if (typeof event.target.closest !== "function") return;
+    var link = event.target.closest(".photo-link");
+    if (!link) return;
+    var list = currentLinks();
+    var i = list.indexOf(link);
+    if (i < 0) return;
+    event.preventDefault();
+    open(i);
   });
 
   btnClose.addEventListener("click", close);
@@ -140,5 +150,14 @@
         first.focus();
       }
     }
+  });
+
+  function closeIfOpen() {
+    if (root.classList.contains("is-open")) close();
+  }
+
+  window.addEventListener("gallery:reshuffled", closeIfOpen);
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) closeIfOpen();
   });
 })();
