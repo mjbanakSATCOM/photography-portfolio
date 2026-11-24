@@ -154,6 +154,7 @@
       a.style.top = b[2].toFixed(2) + "px";
       a.style.width = b[3].toFixed(2) + "px";
       a.style.height = b[4].toFixed(2) + "px";
+      a.style.setProperty("--m", (Math.max(b[3], b[4]) * 0.045).toFixed(2) + "px");   // baked matte = 4.5% of the long edge
       a.classList.toggle("is-feature", b[3] > W * 0.4 && b[4] > s.rowH * 1.3);
       // Tile-sized thumbnails; on 3x phones ask for 2x pixels (looks the same, much lighter).
       var src = a.querySelector("source");

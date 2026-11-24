@@ -2364,3 +2364,14 @@ body.lightbox-open { position: fixed; left: 0; right: 0; width: 100%; }
   .site-nav { gap: 0 1rem; }
 }
 .masonry.mosaic img:not([src]) { opacity: 0; }   /* held back until scrolled near */
+
+/* Gallery wall: the dim veil covers only the photo, so the white mattes stay
+   clean white; --m (the matte width) is set per tile by gallery-mosaic.js. */
+.masonry.mosaic > a::after { inset: var(--m, 0); border-radius: 0; }
+
+/* Phones (380-560px): the menu always breaks after "City & Architecture", so
+   its two lines don't rearrange when the web fonts arrive (no layout shift). */
+@media (min-width: 380px) and (max-width: 560px) {
+  .site-nav::before { content: ""; flex-basis: 100%; order: 1; height: 0; }
+  .site-nav a:nth-child(n+4) { order: 2; }
+}
