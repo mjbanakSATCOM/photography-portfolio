@@ -100,9 +100,16 @@
       background: rgba(217, 164, 65, 0.1);
     }
     @media (max-width: 560px) {
-      .lost-mark { height: 72px; }
-      .lost-trails { flex-direction: column; align-items: stretch; }
-      .lost-trails a { text-align: center; }
+      .lost-page .page-main {
+        min-height: 0;
+        padding-top: 1.15rem;
+        padding-bottom: 2rem;
+      }
+      .lost-mark { height: 64px; margin-bottom: 0.8rem; }
+      .lost-panel { padding: 1.35rem 1.1rem 1.5rem; }
+      .lost-lede { margin-bottom: 1.25rem; }
+      .lost-trails li { flex: 1 1 calc(50% - 0.7rem); }
+      .lost-trails a { width: 100%; text-align: center; box-sizing: border-box; }
     }
   </style>
 </head>
